@@ -1,0 +1,23 @@
+{
+  "name": "race-data-converter",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "test:csv": "ts-node ./test/test-csv.ts",
+    "test:excel-csv": "ts-node ./test/test-excel-csv.ts",
+    "test:mega-squirt": "ts-node ./test/test-mega-squirt.ts",
+    "test:protune": "ts-node ./test/test-protune.ts"
+  },
+  "author": "Guilherme Chaguri",
+  "license": "GPL-2.0",
+  "devDependencies": {
+    "@types/node": "^18.15.11",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.0.2"
+  },
+  "dependencies": {
+    "csv-stringify": "^6.3.0"
+  }
+}
