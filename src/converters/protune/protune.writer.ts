@@ -24,7 +24,7 @@ export class ProtuneWriter implements DataWriterInterface {
     return stream.pipe(grouper).pipe(protune).pipe(prefixer);
   }
 
-  private createHeader(): string {
+  protected createHeader(): string {
     let header = '';
 
     header += '#V2\n';

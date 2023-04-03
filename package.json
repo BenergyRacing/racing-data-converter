@@ -8,7 +8,8 @@
     "test:csv": "ts-node ./test/test-csv.ts",
     "test:excel-csv": "ts-node ./test/test-excel-csv.ts",
     "test:mega-squirt": "ts-node ./test/test-mega-squirt.ts",
-    "test:protune": "ts-node ./test/test-protune.ts"
+    "test:protune": "ts-node ./test/test-protune.ts",
+    "test:pi-toolbox-ascii": "ts-node ./test/test-pi-toolbox-ascii.ts"
   },
   "author": "Guilherme Chaguri",
   "license": "GPL-2.0",

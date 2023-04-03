@@ -21,20 +21,24 @@ export class CsvWriter implements DataWriterInterface {
 
     const csv = stringify({
       delimiter: delimiter,
-      columns: [
-        {
-          key: TimedFrameGrouper.TIMESTAMP_CHANNEL,
-          header: 'Time (ms)',
-        },
-        ...this.options.channels.map<ColumnOption>(channel => ({
-          key: channel.key,
-          header: getChannelName(channel),
-        })),
-      ],
+      columns: this.createColumns(),
       header: true,
     });
 
     return stream.pipe(transform).pipe(csv);
+  }
+
+  protected createColumns(): ColumnOption[] {
+    return [
+      {
+        key: TimedFrameGrouper.TIMESTAMP_CHANNEL,
+        header: 'Time (ms)',
+      },
+      ...this.options.channels.map<ColumnOption>(channel => ({
+        key: channel.key,
+        header: getChannelName(channel),
+      })),
+    ];
   }
 
 }
