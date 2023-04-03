@@ -7,13 +7,13 @@ export function formatWinDarabString(value: string | undefined): string {
   return value.replace(/\t|\n/g, '');
 }
 
-export function formatWinDarabNumber(value: number | undefined, maxDecimalPlaces: number = 0): string {
+export function formatWinDarabNumber(value: number | undefined, minDecimalPlaces: number = 0): string {
   if (value === undefined || isNaN(value))
     return '';
 
   return value.toLocaleString('en-US', {
-    maximumFractionDigits: Math.max(maxDecimalPlaces, 2),
-    minimumFractionDigits: maxDecimalPlaces,
+    maximumFractionDigits: Math.max(minDecimalPlaces, 2),
+    minimumFractionDigits: minDecimalPlaces,
   });
 }
 
