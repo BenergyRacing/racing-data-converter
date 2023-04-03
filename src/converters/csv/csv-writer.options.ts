@@ -12,4 +12,14 @@ export interface CsvWriterOptions extends BaseWriterOptions {
    */
   interval?: number;
 
+  /**
+   * Quote all non-empty values
+   */
+  quoted?: boolean;
+
+  /**
+   * Quote all empty values
+   */
+  quotedEmpty?: boolean;
+
 }

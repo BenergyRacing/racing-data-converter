@@ -14,18 +14,22 @@ export class CsvWriter implements DataWriterInterface {
   }
 
   public createStream(stream: Readable): Transform {
-    const interval = Math.abs(this.options.interval || 20);
-    const delimiter = this.options.delimiter || ',';
-
+    const interval = Math.abs(this.options.interval || 10);
     const transform = new TimedFrameGrouper(interval);
 
+    return this.createCsvStream(stream.pipe(transform));
+  }
+
+  protected createCsvStream(stream: Readable): Transform {
     const csv = stringify({
-      delimiter: delimiter,
+      delimiter: this.options.delimiter || ',',
       columns: this.createColumns(),
       header: true,
+      quoted: this.options.quoted,
+      quoted_empty: this.options.quotedEmpty,
     });
 
-    return stream.pipe(transform).pipe(csv);
+    return stream.pipe(csv);
   }
 
   protected createColumns(): ColumnOption[] {
