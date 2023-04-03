@@ -10,7 +10,8 @@
     "test:mega-squirt": "ts-node ./test/test-mega-squirt.ts",
     "test:protune": "ts-node ./test/test-protune.ts",
     "test:pi-toolbox-ascii": "ts-node ./test/test-pi-toolbox-ascii.ts",
-    "test:motec-csv": "ts-node ./test/test-motec-csv.ts"
+    "test:motec-csv": "ts-node ./test/test-motec-csv.ts",
+    "test:win-darab": "ts-node ./test/test-win-darab.ts"
   },
   "author": "Guilherme Chaguri",
   "license": "GPL-2.0",

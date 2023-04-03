@@ -5,7 +5,13 @@ import { StreamPrefixer } from '../stream-prefixer';
 import { MotecCsvWriterOptions } from './motec-csv-writer.options';
 import { TimedFrameGrouper } from '../timed-frame-grouper';
 import { MotecCsvFormatStream } from './motec-csv-format-stream';
-import { formatMotecDate, formatMotecNumber, formatMotecString, formatMotecTime } from './utils';
+import {
+  formatMotecChannelName,
+  formatMotecDate,
+  formatMotecNumber,
+  formatMotecString,
+  formatMotecTime
+} from './utils';
 import { getChannelName } from '../../utils/channels';
 
 export class MotecCsvWriter extends CsvWriter {
@@ -39,7 +45,7 @@ export class MotecCsvWriter extends CsvWriter {
       },
       ...this.options.channels.map<ColumnOption>(channel => ({
         key: channel.key,
-        header: getChannelName(channel),
+        header: formatMotecChannelName(channel),
       })),
     ];
   }

@@ -1,6 +1,6 @@
 import { Transform, TransformCallback } from 'stream';
 import { DataChannelInterface } from '../../interfaces/data-channel.interface';
-import { formatMotecNumber } from './utils';
+import { formatMotecNumber, formatMotecUnit } from './utils';
 import { TimedFrameGrouper } from '../timed-frame-grouper';
 
 // noinspection JSAnnotator
@@ -26,7 +26,7 @@ export class MotecCsvFormatStream extends Transform {
   protected createUnitsRow(): Record<string, string> {
     return this.channels.reduce(
       (prev, channel) => {
-        return { ...prev, [channel.key]: channel.unit };
+        return { ...prev, [channel.key]: formatMotecUnit(channel) };
       },
       { [TimedFrameGrouper.TIMESTAMP_CHANNEL]: 's' },
     );
