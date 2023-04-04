@@ -3,10 +3,14 @@ import { CsvWriter } from '../csv/csv.writer';
 import { StreamPrefixer } from '../stream-prefixer';
 import { WinDarabWriterOptions } from './win-darab-writer.options';
 import { WinDarabFormatStream } from './win-darab-format-stream';
-import { formatWinDarabChannelName, formatWinDarabNumber, formatWinDarabString } from './utils';
+import {
+  formatWinDarabChannelName,
+  formatWinDarabColumnName,
+  formatWinDarabNumber,
+  formatWinDarabString
+} from './utils';
 import { ColumnOption } from 'csv-stringify';
 import { TimedFrameGrouper } from '../timed-frame-grouper';
-import { getChannelName } from '../../utils/channels';
 
 export class WinDarabWriter extends CsvWriter {
 
@@ -35,7 +39,7 @@ export class WinDarabWriter extends CsvWriter {
     return [
       {
         key: TimedFrameGrouper.TIMESTAMP_CHANNEL,
-        header: 'xtime [s]',
+        header: formatWinDarabColumnName('xtime', 's'),
       },
       ...this.options.channels.map<ColumnOption>(channel => ({
         key: channel.key,

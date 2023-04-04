@@ -1,5 +1,4 @@
-import { SensorChannelType } from '../../enums/sensor-channel.type';
-import { DataChannelInterface } from '../../interfaces/data-channel.interface';
+import { DataChannel } from '../../interfaces/data-channel';
 
 
 export function formatProtuneString(value: string | undefined): string {
@@ -19,10 +18,10 @@ export function formatProtuneNumber(value: number | undefined, decimalPlaces: nu
   });
 }
 
-export function formatProtuneChannelName(channel: DataChannelInterface): string {
+export function formatProtuneChannelName(channel: DataChannel): string {
   return formatProtuneString(channel.name || channel.key); // TODO
 }
 
-export function formatProtuneUnit(channel: DataChannelInterface): string {
+export function formatProtuneUnit(channel: DataChannel): string {
   return formatProtuneString(channel.unit || ''); // TODO
 }

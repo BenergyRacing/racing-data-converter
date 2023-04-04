@@ -1,5 +1,5 @@
 import { Transform, TransformCallback } from 'stream';
-import { DataChannelInterface } from '../../interfaces/data-channel.interface';
+import { DataChannel } from '../../interfaces/data-channel';
 import { formatMotecNumber, formatMotecUnit } from './utils';
 import { TimedFrameGrouper } from '../timed-frame-grouper';
 
@@ -9,7 +9,7 @@ export class MotecCsvFormatStream extends Transform {
   private hasAddedUnits: boolean = false;
 
   constructor(
-    private readonly channels: DataChannelInterface[],
+    private readonly channels: DataChannel[],
   ) {
     super({ objectMode: true });
   }

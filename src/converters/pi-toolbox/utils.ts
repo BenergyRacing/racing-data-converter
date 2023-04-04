@@ -1,4 +1,4 @@
-import { DataChannelInterface } from '../../interfaces/data-channel.interface';
+import { DataChannel } from '../../interfaces/data-channel';
 
 export function formatPiToolboxString(value: string | undefined): string {
   if (!value)
@@ -18,7 +18,7 @@ export function formatPiToolboxNumber(value: number | undefined): string {
   return Number(value).toString();
 }
 
-export function formatPiToolboxColumnName(channel: DataChannelInterface): string {
+export function formatPiToolboxColumnName(channel: DataChannel): string {
   const name = channel.name || channel.key;
 
   if (channel.unit)

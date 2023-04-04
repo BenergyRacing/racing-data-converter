@@ -1,4 +1,6 @@
-import { DataChannelInterface } from '../../interfaces/data-channel.interface';
+import { DataChannel } from '../../interfaces/data-channel';
+
+const winDarabCsvItemLength = 15;
 
 export function formatWinDarabString(value: string | undefined): string {
   if (!value)
@@ -17,12 +19,18 @@ export function formatWinDarabNumber(value: number | undefined, minDecimalPlaces
   });
 }
 
-export function formatWinDarabChannelName(channel: DataChannelInterface): string {
+export function formatWinDarabChannelName(channel: DataChannel): string {
   const name = channel.name || channel.key; // TODO
 
-  if (channel.unit)
-    return `${name} [${channel.unit}]`;
-
-  return name;
+  return formatWinDarabColumnName(name, channel.unit);
 }
 
+export function formatWinDarabColumnName(name: string, unit: string | undefined): string {
+  unit = unit ? `[${unit}]` : '';
+
+  return name + ' '.repeat(Math.max(winDarabCsvItemLength - name.length - unit.length, 1)) + unit;
+}
+
+export function formatWinDarabCsvItem(value: string): string {
+  return value.padStart(winDarabCsvItemLength, ' ');
+}

@@ -1,4 +1,4 @@
-import { DataChannelInterface } from '../../interfaces/data-channel.interface';
+import { DataChannel } from '../../interfaces/data-channel';
 
 export function formatRacePakNumber(value: number | undefined, minDecimalPlaces: number = 2): string {
   if (value === undefined || isNaN(value))
@@ -10,6 +10,6 @@ export function formatRacePakNumber(value: number | undefined, minDecimalPlaces:
   });
 }
 
-export function formatRacePakChannelName(channel: DataChannelInterface): string {
+export function formatRacePakChannelName(channel: DataChannel): string {
   return channel.name || channel.key; // TODO
 }

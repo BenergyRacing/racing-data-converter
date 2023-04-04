@@ -1,6 +1,5 @@
 import { Transform, TransformCallback } from 'stream';
-import { DataChannelInterface } from '../../interfaces/data-channel.interface';
-import { formatWinDarabNumber } from './utils';
+import { formatWinDarabCsvItem, formatWinDarabNumber } from './utils';
 import { TimedFrameGrouper } from '../timed-frame-grouper';
 
 // noinspection JSAnnotator
@@ -14,14 +13,16 @@ export class WinDarabFormatStream extends Transform {
     const result: Record<string, string> = {};
 
     Object.keys(chunk).forEach(key => {
-      const value = chunk[key];
+      let value = chunk[key];
 
       if (typeof value !== 'number')
-        result[key] = value;
+        value = value.toString();
       else if (key === TimedFrameGrouper.TIMESTAMP_CHANNEL)
-        result[key] = formatWinDarabNumber(value / 1000, 2);
+        value = formatWinDarabNumber(value / 1000, 2);
       else
-        result[key] = formatWinDarabNumber(value);
+        value = formatWinDarabNumber(value);
+
+      result[key] = formatWinDarabCsvItem(value);
     });
 
     callback(null, result);

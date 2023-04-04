@@ -1,11 +1,11 @@
 import { stringify, ColumnOption } from 'csv-stringify';
-import { DataWriterInterface } from '../../interfaces/data-writer.interface';
+import { BaseWriter } from '../../interfaces/base.writer';
 import { CsvWriterOptions } from './csv-writer.options';
 import { getChannelName } from '../../utils/channels';
 import { Readable, Transform } from 'stream';
 import { TimedFrameGrouper } from '../timed-frame-grouper';
 
-export class CsvWriter implements DataWriterInterface {
+export class CsvWriter implements BaseWriter {
 
   constructor(protected readonly options: CsvWriterOptions) {}
 

@@ -1,12 +1,12 @@
 import { ProtuneWriterOptions } from './protune-writer.options';
-import { DataWriterInterface } from '../../interfaces/data-writer.interface';
+import { BaseWriter } from '../../interfaces/base.writer';
 import { Readable, Transform } from 'stream';
 import { formatProtuneChannelName, formatProtuneString, formatProtuneUnit } from './utils';
 import { TimedFrameGrouper } from '../timed-frame-grouper';
 import { StreamPrefixer } from '../stream-prefixer';
 import { ProtuneGroupStream } from './protune-group-stream';
 
-export class ProtuneWriter implements DataWriterInterface {
+export class ProtuneWriter implements BaseWriter {
 
   constructor(private readonly options: ProtuneWriterOptions) {}
 

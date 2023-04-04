@@ -1,4 +1,4 @@
-import { DataChannelInterface } from '../../interfaces/data-channel.interface';
+import { DataChannel } from '../../interfaces/data-channel';
 
 export function formatMotecString(value: string | undefined): string {
   if (!value)
@@ -40,10 +40,10 @@ export function formatMotecTime(date: Date | undefined): string {
   });
 }
 
-export function formatMotecChannelName(channel: DataChannelInterface): string {
+export function formatMotecChannelName(channel: DataChannel): string {
   return channel.name || channel.key; // TODO
 }
 
-export function formatMotecUnit(channel: DataChannelInterface): string {
+export function formatMotecUnit(channel: DataChannel): string {
   return channel.unit || ''; // TODO
 }

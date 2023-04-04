@@ -1,7 +1,7 @@
-import { DataChannelInterface } from './data-channel.interface';
+import { DataChannel } from './data-channel';
 
 export interface BaseWriterOptions {
 
-  channels: DataChannelInterface[];
+  channels: DataChannel[];
 
 }

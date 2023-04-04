@@ -1,6 +1,5 @@
 import { Transform, TransformCallback } from 'stream';
-import { DataChannelInterface } from '../../interfaces/data-channel.interface';
-import { DataFrameInterface } from '../../interfaces/data-frame.interface';
+import { DataChannel } from '../../interfaces/data-channel';
 import { formatProtuneNumber } from './utils';
 import { TimedFrameGrouper } from '../timed-frame-grouper';
 
@@ -8,7 +7,7 @@ import { TimedFrameGrouper } from '../timed-frame-grouper';
 export class ProtuneGroupStream extends Transform {
 
   constructor(
-    private readonly channels: DataChannelInterface[],
+    private readonly channels: DataChannel[],
   ) {
     super({ writableObjectMode: true, readableObjectMode: false });
   }

@@ -1,6 +1,6 @@
 import { Readable, Transform } from 'stream';
 
-export interface DataWriterInterface<C = string> {
+export interface BaseWriter<C = string> {
 
   /**
    * Gets the suggested file extension, including the dot
@@ -9,7 +9,7 @@ export interface DataWriterInterface<C = string> {
 
   /**
    * Creates a transform stream pipeline that converts the
-   * {@link DataFrameInterface} objects into the file format
+   * {@link DataFrame} objects into the file format
    *
    * @param stream The readable stream
    */

@@ -1,5 +1,5 @@
 import { Transform } from 'stream';
-import { DataFrameInterface } from '../interfaces/data-frame.interface';
+import { DataFrame } from '../interfaces/data-frame';
 
 // noinspection JSAnnotator
 /**
@@ -24,7 +24,7 @@ export class TimedFrameGrouper extends Transform {
     super({ objectMode: true });
   }
 
-  _transform(chunk: DataFrameInterface, encoding: BufferEncoding, callback: () => void) {
+  _transform(chunk: DataFrame, encoding: BufferEncoding, callback: () => void) {
     while (true) {
       if (chunk.timestamp <= this.currentTime) {
 

@@ -1,5 +1,5 @@
 
-export enum SensorChannelType {
+export enum SensorChannel {
 
   ACCELERATION = 'acceleration',
 
