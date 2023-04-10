@@ -5,7 +5,7 @@ export interface BaseWriter<C = string> {
   /**
    * Gets the suggested file extension, including the dot
    */
-  readonly get extension: string;
+  readonly extension: string;
 
   /**
    * Creates a transform stream pipeline that converts the
