@@ -1,4 +1,6 @@
 import { DataChannel } from '../../interfaces/data-channel';
+import { proTuneChannels } from './mappings';
+import { SensorChannel } from '../../enums/sensor-channel';
 
 
 export function formatProtuneString(value: string | undefined): string {
@@ -6,6 +8,13 @@ export function formatProtuneString(value: string | undefined): string {
     return '';
 
   return value.replace(/;|\n/g, '');
+}
+
+export function formatProtuneMultilineString(value: string | undefined): string {
+  if (!value)
+    return '';
+
+  return value.trim() + '\n';
 }
 
 export function formatProtuneNumber(value: number | undefined, decimalPlaces: number): string {
@@ -19,9 +28,11 @@ export function formatProtuneNumber(value: number | undefined, decimalPlaces: nu
 }
 
 export function formatProtuneChannelName(channel: DataChannel): string {
-  return formatProtuneString(channel.name || channel.key); // TODO
+  const name = proTuneChannels[channel.key as SensorChannel] || channel.name || channel.key;
+
+  return formatProtuneString(name);
 }
 
 export function formatProtuneUnit(channel: DataChannel): string {
-  return formatProtuneString(channel.unit || ''); // TODO
+  return formatProtuneString(channel.unit || '');
 }

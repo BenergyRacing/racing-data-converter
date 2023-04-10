@@ -12,4 +12,17 @@ export interface ProtuneWriterOptions extends BaseWriterOptions {
    */
   serialNumber?: string;
 
+  mainComment?: string;
+  logId?: string;
+  dashVersion?: string;
+  filterChannel?: string;
+  dashTriggerPoint?: string;
+  dashReferencePoints?: string;
+
+  numberOfShows?: number;
+  trackLabel?: string;
+  maxSpeed?: string; // TODO better typing
+  bestLap?: number;
+  numberOfLaps?: number;
+
 }

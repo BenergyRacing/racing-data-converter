@@ -1,7 +1,12 @@
 import { ProtuneWriterOptions } from './protune-writer.options';
 import { BaseWriter } from '../../interfaces/base.writer';
 import { Readable, Transform } from 'stream';
-import { formatProtuneChannelName, formatProtuneString, formatProtuneUnit } from './utils';
+import {
+  formatProtuneChannelName,
+  formatProtuneMultilineString, formatProtuneNumber,
+  formatProtuneString,
+  formatProtuneUnit
+} from './utils';
 import { TimedFrameGrouper } from '../timed-frame-grouper';
 import { StreamPrefixer } from '../stream-prefixer';
 import { ProtuneGroupStream } from './protune-group-stream';
@@ -25,32 +30,34 @@ export class ProtuneWriter implements BaseWriter {
   }
 
   protected createHeader(): string {
+    const opt = this.options;
     let header = '';
 
     header += '#V2\n';
-    header += '#SERIALNUMBER ' + formatProtuneString(this.options.serialNumber) + '\n';
+    header += '#SERIALNUMBER ' + formatProtuneString(opt.serialNumber) + '\n';
     header += '#MAINCOMMENT\n';
+    header += formatProtuneMultilineString(opt.mainComment);
     header += '#ENDMAINCOMMENT\n';
     header += '#LOGID\n';
-    header += '\n\n\n';
+    header += formatProtuneMultilineString(opt.logId);
     header += '#ENDLOGID\n';
     header += '#DASHVERSION\n';
-    header += 'FW:05912\n';
+    header += formatProtuneMultilineString(opt.dashVersion || 'FW:05912');
     header += '#ENDDASHVERSION\n';
     header += '#FILTERCHANNEL\n';
-    header += '\n';
+    header += formatProtuneMultilineString(opt.filterChannel);
     header += '#ENDFILTERCHANNEL\n';
     header += '#DASHTRIGGERPOINT\n';
-    header += '\n';
+    header += formatProtuneMultilineString(opt.dashTriggerPoint);
     header += '#ENDDASHTRIGGERPOINT\n';
     header += '#DASHREFERENCESPOINTS\n';
-    header += '\n';
+    header += formatProtuneMultilineString(opt.dashReferencePoints);
     header += '#ENDDASHREFERENCESPOINTS\n';
-    header += '#NUMBEROFSHOWS \n';
-    header += '#TRACKLABEL Desconhecido\n';
-    header += '#MAXSPEED \n';
-    header += '#BESTLAP \n';
-    header += '#NUMBEROFLAPS \n';
+    header += '#NUMBEROFSHOWS ' + formatProtuneNumber(opt.numberOfShows, 0) + '\n';
+    header += '#TRACKLABEL ' + formatProtuneString(opt.trackLabel || 'Desconhecido') + '\n';
+    header += '#MAXSPEED ' + formatProtuneString(opt.maxSpeed) + '\n';
+    header += '#BESTLAP ' + formatProtuneNumber(opt.bestLap, 0) + '\n';
+    header += '#NUMBEROFLAPS ' + formatProtuneNumber(opt.numberOfLaps, 0) + '\n';
     header += '#DATASTART\n';
 
     // Columns
