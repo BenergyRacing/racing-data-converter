@@ -6,7 +6,21 @@ This library was developed at [B'Energy Racing](https://benergyracing.com.br), a
 
 ### Outputs supported
 
-- MegaSquirt (.msl) - MegaLogViewer
-- Protune (.dlf) - Protune Analyzer
-- CSV/TSV
-- Excel
+| Format            | Extension  | Software            |
+|-------------------|------------|---------------------|
+| Pro Tune          | .dlf       | Pro Tune Analyzer   |
+| MegaSquirt        | .msl       | MegaLogViewer       |
+| MoTeC CSV         | .csv       | MoTeC i2            |
+| Pi ASCII          | .txt       | Cosworth Pi Toolbox |
+| BOSCH Darab ASCII | .txt       | Bosch WinDarab      |
+| RacePak ASCII     | .txt       | RacePak DataLink II |
+| Excel CSV         | .csv       | Microsoft Excel     |
+| CSV               | .csv, .tsv | -                   |
+
+### Command Line Interface
+
+// TODO
+
+### Programming Interface
+
+// TODO
