@@ -4,8 +4,17 @@ export interface CsvWriterOptions extends BaseWriterOptions {
 
   /**
    * The CSV column delimiter
+   *
+   * Defaults to a comma (,)
    */
   delimiter?: string;
+
+  /**
+   * The CSV line delimiter
+   *
+   * Defaults to a LF (\n)
+   */
+  recordDelimiter?: string;
 
   /**
    * The interval in milliseconds in which each row will be spaced

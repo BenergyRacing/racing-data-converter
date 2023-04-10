@@ -27,6 +27,7 @@ export class CsvWriter implements BaseWriter {
       header: true,
       quoted: this.options.quoted,
       quoted_empty: this.options.quotedEmpty,
+      record_delimiter: this.options.recordDelimiter,
     });
 
     return stream.pipe(csv);
