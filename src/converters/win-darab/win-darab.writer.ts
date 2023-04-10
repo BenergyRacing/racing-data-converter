@@ -29,7 +29,7 @@ export class WinDarabWriter extends CsvWriter {
   }
 
   protected createCsvStream(stream: Readable): Transform {
-    const formatter = new WinDarabFormatStream();
+    const formatter = new WinDarabFormatStream(this.options.channels);
     const prefixer = new StreamPrefixer(this.createHeader());
 
     return super.createCsvStream(stream.pipe(formatter)).pipe(prefixer);
