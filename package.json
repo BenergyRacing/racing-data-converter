@@ -4,20 +4,23 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "test:csv": "ts-node ./test/test-csv.ts",
-    "test:excel-csv": "ts-node ./test/test-excel-csv.ts",
-    "test:mega-squirt": "ts-node ./test/test-mega-squirt.ts",
-    "test:protune": "ts-node ./test/test-protune.ts",
-    "test:pi-toolbox-ascii": "ts-node ./test/test-pi-toolbox-ascii.ts",
-    "test:motec-csv": "ts-node ./test/test-motec-csv.ts",
-    "test:win-darab": "ts-node ./test/test-win-darab.ts",
-    "test:race-pak": "ts-node ./test/test-race-pak.ts"
+    "test": "jest",
+    "test:csv": "ts-node test/samples/test-csv.ts",
+    "test:excel-csv": "ts-node test/samples/test-excel-csv.ts",
+    "test:mega-squirt": "ts-node test/samples/test-mega-squirt.ts",
+    "test:protune": "ts-node test/samples/test-protune.ts",
+    "test:pi-toolbox-ascii": "ts-node test/samples/test-pi-toolbox-ascii.ts",
+    "test:motec-csv": "ts-node test/samples/test-motec-csv.ts",
+    "test:win-darab": "ts-node test/samples/test-win-darab.ts",
+    "test:race-pak": "ts-node test/samples/test-race-pak.ts"
   },
   "author": "Guilherme Chaguri",
   "license": "GPL-2.0",
   "devDependencies": {
+    "@types/jest": "^29.5.0",
     "@types/node": "^18.15.11",
+    "jest": "^29.5.0",
+    "ts-jest": "^29.1.0",
     "ts-node": "^10.9.1",
     "typescript": "^5.0.2"
   },

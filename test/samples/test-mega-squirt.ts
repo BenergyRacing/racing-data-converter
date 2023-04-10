@@ -1,6 +1,6 @@
 import { createWriteStream } from 'fs';
-import { createRandomDataStream, testChannels } from './utils/data';
-import { MegaSquirtWriter } from '../src/converters/mega-squirt/mega-squirt.writer';
+import { createRandomDataStream, testChannels } from '../data/utils';
+import { MegaSquirtWriter } from '../../src/converters/mega-squirt/mega-squirt.writer';
 
 const csv = new MegaSquirtWriter({
   channels: testChannels,

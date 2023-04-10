@@ -1,6 +1,6 @@
 import { createWriteStream } from 'fs';
-import { createRandomDataStream, testChannels } from './utils/data';
-import { ExcelCsvWriter } from '../src/converters/excel/excel-csv.writer';
+import { createRandomDataStream, testChannels } from '../data/utils';
+import { ExcelCsvWriter } from '../../src/converters/excel/excel-csv.writer';
 
 const csv = new ExcelCsvWriter({
   channels: testChannels,

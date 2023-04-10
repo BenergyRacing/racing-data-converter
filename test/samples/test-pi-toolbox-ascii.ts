@@ -1,6 +1,6 @@
 import { createWriteStream } from 'fs';
-import { createRandomDataStream, testChannels } from './utils/data';
-import { PiToolboxAsciiWriter } from '../src/converters/pi-toolbox/pi-toolbox-ascii.writer';
+import { createRandomDataStream, testChannels } from '../data/utils';
+import { PiToolboxAsciiWriter } from '../../src/converters/pi-toolbox/pi-toolbox-ascii.writer';
 
 const ascii = new PiToolboxAsciiWriter({
   channels: testChannels,

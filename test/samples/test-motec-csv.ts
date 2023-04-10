@@ -1,6 +1,6 @@
 import { createWriteStream } from 'fs';
-import { createRandomDataStream, testChannels } from './utils/data';
-import { MotecCsvWriter } from '../src/converters/motec/motec-csv.writer';
+import { createRandomDataStream, testChannels } from '../data/utils';
+import { MotecCsvWriter } from '../../src/converters/motec/motec-csv.writer';
 
 const csv = new MotecCsvWriter({
   channels: testChannels,

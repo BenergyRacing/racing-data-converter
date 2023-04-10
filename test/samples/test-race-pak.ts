@@ -1,6 +1,6 @@
 import { createWriteStream } from 'fs';
-import { createRandomDataStream, testChannels } from './utils/data';
-import { RacePakWriter } from '../src/converters/race-pak/race-pak.writer';
+import { createRandomDataStream, testChannels } from '../data/utils';
+import { RacePakWriter } from '../../src/converters/race-pak/race-pak.writer';
 
 const csv = new RacePakWriter({
   channels: testChannels,

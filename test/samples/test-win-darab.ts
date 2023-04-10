@@ -1,6 +1,6 @@
 import { createWriteStream } from 'fs';
-import { createRandomDataStream, testChannels } from './utils/data';
-import { WinDarabWriter } from '../src/converters/win-darab/win-darab.writer';
+import { createRandomDataStream, testChannels } from '../data/utils';
+import { WinDarabWriter } from '../../src/converters/win-darab/win-darab.writer';
 
 const windarab = new WinDarabWriter({
   channels: testChannels,

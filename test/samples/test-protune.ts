@@ -1,6 +1,6 @@
 import { createWriteStream } from 'fs';
-import { createRandomDataStream, testChannels } from './utils/data';
-import { ProtuneWriter } from '../src/converters/protune/protune.writer';
+import { createRandomDataStream, testChannels } from '../data/utils';
+import { ProtuneWriter } from '../../src/converters/protune/protune.writer';
 
 const protune = new ProtuneWriter({
   channels: testChannels,

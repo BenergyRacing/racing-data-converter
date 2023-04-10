@@ -1,6 +1,6 @@
 import { ProtuneWriter } from '../../src/converters/protune';
-import { getWriterOutput } from '../utils/data';
-import { frames1 } from './inputs/frames1';
+import { getWriterOutput } from '../data/utils';
+import { frames1 } from '../data/frames1';
 
 const frames1Result = `#V2
 #SERIALNUMBER 

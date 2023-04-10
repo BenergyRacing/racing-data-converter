@@ -1,6 +1,6 @@
 import { createWriteStream } from 'fs';
-import { createRandomDataStream, testChannels } from './utils/data';
-import { CsvWriter } from '../src/converters/csv/csv.writer';
+import { createRandomDataStream, testChannels } from '../data/utils';
+import { CsvWriter } from '../../src/converters/csv/csv.writer';
 
 const csv = new CsvWriter({
   channels: testChannels,
