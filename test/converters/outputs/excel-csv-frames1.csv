@@ -1,0 +1,5 @@
+sep=
+Time (ms)	Channel 1	Channel 2 (m)	"Channel ""3"""
+10	10
+20	30	20
+50	40	20	0.142

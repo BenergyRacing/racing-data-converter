@@ -7,7 +7,8 @@ export class ExcelCsvWriter extends CsvWriter {
 
   constructor(options: ExcelCsvWriterOptions) {
     super({
-      delimiter: '\t',
+      delimiter: options.delimiter || '\t',
+      recordDelimiter: options.recordDelimiter || '\r\n',
       ...options,
     });
   }
@@ -19,7 +20,7 @@ export class ExcelCsvWriter extends CsvWriter {
   public createStream(stream: Readable): Transform {
     const result = super.createStream(stream);
 
-    const prefixer = new StreamPrefixer('sep=' + this.options.delimiter + '\n');
+    const prefixer = new StreamPrefixer('sep=' + this.options.delimiter + this.options.recordDelimiter);
 
     return result.pipe(prefixer);
   }

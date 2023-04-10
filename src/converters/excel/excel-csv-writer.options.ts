@@ -7,4 +7,18 @@ export interface ExcelCsvWriterOptions extends BaseWriterOptions {
    */
   interval?: number;
 
+  /**
+   * The CSV column delimiter
+   *
+   * Defaults to a tab (\t)
+   */
+  delimiter?: string;
+
+  /**
+   * The CSV line delimiter
+   *
+   * Defaults to a CRLF (\r\n)
+   */
+  recordDelimiter?: string;
+
 }
