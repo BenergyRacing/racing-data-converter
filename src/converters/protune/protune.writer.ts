@@ -10,6 +10,7 @@ import {
 import { TimedFrameGrouper } from '../timed-frame-grouper';
 import { StreamPrefixer } from '../stream-prefixer';
 import { ProtuneGroupStream } from './protune-group-stream';
+import { TimeFixer } from '../time-fixer';
 
 export class ProtuneWriter implements BaseWriter {
 
@@ -22,11 +23,12 @@ export class ProtuneWriter implements BaseWriter {
   public createStream(stream: Readable): Transform {
     const interval = Math.abs(this.options.interval || 10);
 
+    const fixer = new TimeFixer();
     const grouper = new TimedFrameGrouper(interval);
     const protune = new ProtuneGroupStream(this.options.channels);
     const prefixer = new StreamPrefixer(this.createHeader());
 
-    return stream.pipe(grouper).pipe(protune).pipe(prefixer);
+    return stream.pipe(fixer).pipe(grouper).pipe(protune).pipe(prefixer);
   }
 
   protected createHeader(): string {
