@@ -7,7 +7,7 @@ const program = new Command();
 
 program
   .name('racing-data-converter')
-  .description('CLI to convert racing data into data analysis software formats')
+  .description('CLI to convert racing data into formats from popular data analysis software')
   .version('1.0.0')
   .argument('<input>', 'input file path')
   .argument('<output>', 'output file path')

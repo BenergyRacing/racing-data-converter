@@ -7,6 +7,6 @@ const protune = new ProtuneWriter({
 });
 
 const data = createRandomDataStream();
-const out = createWriteStream('./test/out/test-protune' + protune.extension);
+const out = createWriteStream('./test/samples/out/test-protune' + protune.extension);
 
 protune.createStream(data).pipe(out);

@@ -7,6 +7,6 @@ const windarab = new WinDarabWriter({
 });
 
 const data = createRandomDataStream();
-const out = createWriteStream('./test/out/test-win-darab' + windarab.extension);
+const out = createWriteStream('./test/samples/out/test-win-darab' + windarab.extension);
 
 windarab.createStream(data).pipe(out);

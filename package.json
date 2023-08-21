@@ -1,10 +1,10 @@
 {
-  "name": "race-data-converter",
+  "name": "racing-data-converter",
   "version": "1.0.0",
-  "description": "",
+  "description": "Converts racing data into formats from popular data analysis software",
   "main": "index.js",
   "scripts": {
-    "cli": "ts-node ./src/cli/index.ts",
+    "cli": "ts-node ./src/cli/cli.ts",
     "build": "tsc",
     "test": "jest",
     "test:csv": "ts-node test/samples/test-csv.ts",
@@ -14,7 +14,8 @@
     "test:pi-toolbox-ascii": "ts-node test/samples/test-pi-toolbox-ascii.ts",
     "test:motec-csv": "ts-node test/samples/test-motec-csv.ts",
     "test:win-darab": "ts-node test/samples/test-win-darab.ts",
-    "test:race-pak": "ts-node test/samples/test-race-pak.ts"
+    "test:race-pak": "ts-node test/samples/test-race-pak.ts",
+    "test:readme": "ts-node test/samples/test-readme.ts"
   },
   "bin": {
     "racing-data-converter": "./lib/cli/cli.js"

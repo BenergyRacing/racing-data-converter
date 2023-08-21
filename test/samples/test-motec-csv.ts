@@ -7,6 +7,6 @@ const csv = new MotecCsvWriter({
 });
 
 const data = createRandomDataStream();
-const out = createWriteStream('./test/out/test-motec-csv' + csv.extension);
+const out = createWriteStream('./test/samples/out/test-motec-csv' + csv.extension);
 
 csv.createStream(data).pipe(out);

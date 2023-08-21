@@ -7,6 +7,6 @@ const csv = new ExcelCsvWriter({
 });
 
 const data = createRandomDataStream();
-const out = createWriteStream('./test/out/test-excel-csv' + csv.extension);
+const out = createWriteStream('./test/samples/out/test-excel-csv' + csv.extension);
 
 csv.createStream(data).pipe(out);

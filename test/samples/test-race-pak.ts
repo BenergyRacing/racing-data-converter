@@ -7,6 +7,6 @@ const csv = new RacePakWriter({
 });
 
 const data = createRandomDataStream();
-const out = createWriteStream('./test/out/test-race-pak' + csv.extension);
+const out = createWriteStream('./test/samples/out/test-race-pak' + csv.extension);
 
 csv.createStream(data).pipe(out);

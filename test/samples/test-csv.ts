@@ -7,6 +7,6 @@ const csv = new CsvWriter({
 });
 
 const data = createRandomDataStream();
-const out = createWriteStream('./test/out/test-csv' + csv.extension);
+const out = createWriteStream('./test/samples/out/test-csv' + csv.extension);
 
 csv.createStream(data).pipe(out);

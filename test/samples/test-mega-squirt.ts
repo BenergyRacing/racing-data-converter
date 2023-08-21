@@ -7,6 +7,6 @@ const csv = new MegaSquirtWriter({
 });
 
 const data = createRandomDataStream();
-const out = createWriteStream('./test/out/test-mega-squirt' + csv.extension);
+const out = createWriteStream('./test/samples/out/test-mega-squirt' + csv.extension);
 
 csv.createStream(data).pipe(out);

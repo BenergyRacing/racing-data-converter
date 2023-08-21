@@ -7,6 +7,6 @@ const ascii = new PiToolboxAsciiWriter({
 });
 
 const data = createRandomDataStream();
-const out = createWriteStream('./test/out/test-pi-toolbox-ascii' + ascii.extension);
+const out = createWriteStream('./test/samples/out/test-pi-toolbox-ascii' + ascii.extension);
 
 ascii.createStream(data).pipe(out);

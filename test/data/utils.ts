@@ -11,12 +11,12 @@ export const testChannels: DataChannel[] = [
     name: 'Acceleration'
   },
   {
-    key: 'negocio',
-    name: 'Negocio!'
+    key: 'test',
+    name: 'Test!'
   },
 ];
 
-export function writeRandomData(writable: Writable, timestamp: number): void {
+export function writeRandomData(writable: DataFrameStream, timestamp: number): void {
   for (const channel of testChannels) {
     writable.write({
       channel: channel.key,
@@ -27,7 +27,7 @@ export function writeRandomData(writable: Writable, timestamp: number): void {
 }
 
 export function createRandomDataStream(samples: number = 10, interval: number = 10): Readable {
-  const passThrough = new PassThrough({ objectMode: true });
+  const passThrough = new DataFrameStream();
 
   for (let i = 0; i < samples; i++) {
     writeRandomData(passThrough, i * interval);
