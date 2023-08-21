@@ -17,9 +17,9 @@ const frames1Result = `"Format","MoTeC CSV File",,,"Workbook",""
 
 "Time","Channel 1","Channel 2","Channel ""3"""
 "s",,"m",
-"0.010","10",,
-"0.020","30","20",
-"0.050","40","20","0.142"
+"0.000","10",,
+"0.010","30","20",
+"0.040","40","20","0.142"
 `;
 
 test('motec csv conversion', async () => {

@@ -4,9 +4,9 @@ import { frames1 } from '../data/frames1';
 
 const frames1Result = `sep=\t
 Time (ms)\tChannel 1\tChannel 2 (m)\t"Channel ""3"""
-10\t10\t\t
-20\t30\t20\t
-50\t40\t20\t0.142
+0\t10\t\t
+10\t30\t20\t
+40\t40\t20\t0.142
 `;
 
 test('excel csv conversion', async () => {

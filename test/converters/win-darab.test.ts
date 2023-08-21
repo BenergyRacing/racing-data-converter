@@ -12,9 +12,9 @@ const frames1Result = `# BOSCH-DARAB extract file created 01.01.2023 00:00:00
 #
 #
 xtime       [s]\tChannel 1      \tChannel 2   [m]\t"Channel ""3""    "
-           0.01\t             10\t               \t               
-           0.02\t             30\t             20\t               
-           0.05\t             40\t             20\t           0.14
+           0.00\t             10\t               \t               
+           0.01\t             30\t             20\t               
+           0.04\t             40\t             20\t           0.14
 `;
 
 test('windarab conversion', async () => {

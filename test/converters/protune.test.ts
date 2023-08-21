@@ -25,9 +25,9 @@ FW:05912
 #DATASTART
 Datalog Time ; Channel 1 ; Channel 2 ; Channel "3" ; 
 seg. ;  ; m ;  ; 
-0,010A10,00AA
-0,020A30,00A20,00A
-0,050A40,00A20,00A0,14
+0,000A10,00AA
+0,010A30,00A20,00A
+0,040A40,00A20,00A0,14
 $`;
 
 test('protune conversion', async () => {

@@ -4,9 +4,9 @@ import { frames1 } from '../data/frames1';
 import { formatRacePakNumber } from '../../src/converters/race-pak/utils';
 
 const frames1Result = `Time,Channel 1,Channel 2,"Channel ""3"""
-0.0100,10.00,,
-0.0200,30.00,20.00,
-0.0500,40.00,20.00,0.142
+0.0000,10.00,,
+0.0100,30.00,20.00,
+0.0400,40.00,20.00,0.142
 `;
 
 test('racepak conversion', async () => {
