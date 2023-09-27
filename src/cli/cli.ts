@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import { Command, Option } from 'commander';
 import { InputFormat } from './input';
 import { OutputFormat } from './output';
@@ -7,7 +9,7 @@ const program = new Command();
 
 program
   .name('racing-data-converter')
-  .description('CLI to convert racing data into formats from popular data analysis software')
+  .description('Convert time series data into formats from popular motorsport data analysis software')
   .version('1.0.0')
   .showHelpAfterError()
   .argument('<input>', 'input file path')

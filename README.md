@@ -1,6 +1,6 @@
 # Racing Data Converter
 
-Converts race data frames into popular Data Logger formats.
+Converts time series data into popular motorsport Data Logger formats.
 
 This library was developed at [B'Energy Racing](https://benergyracing.com.br), a Formula SAE Electric Team from the [Facens University Center](https://facens.br).
 
