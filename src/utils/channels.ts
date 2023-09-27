@@ -22,7 +22,7 @@ export function getChannelName(channel: DataChannel): string {
  * @param name The column name
  */
 export function parseDataChannelFromName(name: string): DataChannel {
-  const regex = /^(.*?)\W*(\((.+?)\))?\W*(\[(.+?)\])?$/m;
+  const regex = /^(.*?)\W*(?:\((.+?)\))?\W*(?:\[(.+?)\])?$/m;
   const match = regex.exec(name);
 
   if (!match) {
