@@ -24,6 +24,7 @@ export function formatProtuneNumber(value: number | undefined, decimalPlaces: nu
   return value.toLocaleString('pt-BR', {
     maximumFractionDigits: decimalPlaces,
     minimumFractionDigits: decimalPlaces,
+    useGrouping: false,
   });
 }
 
