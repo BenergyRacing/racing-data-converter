@@ -27,6 +27,22 @@
     "lib/**/*",
     "man/**/*"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/BenergyRacing/racing-data-converter.git"
+  },
+  "keywords": [
+    "racing",
+    "data-converter",
+    "motorsport",
+    "protune",
+    "megasquirt",
+    "motec",
+    "pi-toolbox",
+    "racepak",
+    "excel",
+    "csv"
+  ],
   "dependencies": {
     "commander": "^10.0.0",
     "csv-parse": "^5.3.8",

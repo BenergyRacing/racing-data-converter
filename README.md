@@ -9,7 +9,7 @@ This library was developed at [B'Energy Racing](https://benergyracing.com.br), a
 | Format            | Extension  | Software            |
 |-------------------|------------|---------------------|
 | Pro Tune          | .dlf       | Pro Tune Analyzer   |
-| MegaSquirt        | .msl       | MegaLogViewer       |
+| MegaSquirt ASCII  | .msl       | MegaLogViewer       |
 | MoTeC CSV         | .csv       | MoTeC i2            |
 | Pi ASCII          | .txt       | Cosworth Pi Toolbox |
 | BOSCH Darab ASCII | .txt       | Bosch WinDarab      |
