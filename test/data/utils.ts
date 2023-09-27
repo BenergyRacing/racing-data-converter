@@ -14,6 +14,10 @@ export const testChannels: DataChannel[] = [
     key: 'test',
     name: 'Test!'
   },
+  {
+    key: 'sine',
+    name: 'Sine',
+  },
 ];
 
 export function writeRandomData(writable: DataFrameStream, timestamp: number): void {
@@ -21,12 +25,12 @@ export function writeRandomData(writable: DataFrameStream, timestamp: number): v
     writable.write({
       channel: channel.key,
       timestamp: timestamp,
-      value: Math.floor(1000 * Math.random()),
+      value: channel.key === 'sine' ? Math.sin(timestamp / 1000 * Math.PI * 2) : Math.floor(1000 * Math.random()),
     } as DataFrame);
   }
 }
 
-export function createRandomDataStream(samples: number = 10, interval: number = 10): Readable {
+export function createRandomDataStream(samples: number = 100, interval: number = 10): Readable {
   const passThrough = new DataFrameStream();
 
   for (let i = 0; i < samples; i++) {
