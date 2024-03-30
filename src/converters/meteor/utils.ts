@@ -1,7 +1,6 @@
-import { TopicMetadata } from './spec/topic-metadata';
 import { DataFormat, DataFormatType } from './spec/data-format';
 import { DataFrame } from '../../interfaces/data-frame';
-import { MeteorSpecification } from './spec/meteor-specification';
+import { MeteorSpecification, TopicMetadata } from './spec/meteor-specification';
 
 export const LogSignature = Buffer.from([
   0x89,

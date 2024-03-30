@@ -1,6 +1,6 @@
 import { Readable, Transform } from 'stream';
 
-export interface BaseWriter<C = string> {
+export interface BaseWriter {
 
   /**
    * Gets the suggested file extension, including the dot

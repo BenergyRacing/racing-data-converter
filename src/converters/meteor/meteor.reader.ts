@@ -22,7 +22,7 @@ export class MeteorReader {
         resolve({
           ...general,
           stream: parser,
-        })
+        });
       });
 
       parser.once('error', (error) => reject(error));

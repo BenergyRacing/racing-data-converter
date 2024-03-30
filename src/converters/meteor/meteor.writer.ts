@@ -1,7 +1,6 @@
 import { BaseWriter } from '../../interfaces/base.writer';
 import { Readable, Transform } from 'stream';
 import { MeteorWriterOptions } from './meteor-writer.options';
-import { TimeFixer } from '../time-fixer';
 import { StreamPrefixer } from '../stream-prefixer';
 import { MeteorFrameStream } from './meteor-frame-stream';
 import { LogSignature } from './utils';
@@ -18,11 +17,10 @@ export class MeteorWriter implements BaseWriter {
   }
 
   public createStream(stream: Readable): Transform {
-    const fixer = new TimeFixer();
     const meteor = new MeteorFrameStream(this.options.spec);
     const prefixer = new StreamPrefixer(this.createHeader());
 
-    return stream.pipe(fixer).pipe(meteor).pipe(prefixer);
+    return stream.pipe(meteor).pipe(prefixer);
   }
 
   private createHeader(): Buffer {

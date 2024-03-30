@@ -6,16 +6,17 @@ This library was developed at [B'Energy Racing](https://benergyracing.com.br), a
 
 ## Outputs supported
 
-| Format            | Extension  | Software            |
-|-------------------|------------|---------------------|
-| Pro Tune          | .dlf       | Pro Tune Analyzer   |
-| MegaSquirt ASCII  | .msl       | MegaLogViewer       |
-| MoTeC CSV         | .csv       | MoTeC i2            |
-| Pi ASCII          | .txt       | Cosworth Pi Toolbox |
-| BOSCH Darab ASCII | .txt       | Bosch WinDarab      |
-| RacePak ASCII     | .txt       | RacePak DataLink II |
-| Excel CSV         | .csv       | Microsoft Excel     |
-| CSV               | .csv, .tsv | -                   |
+| Format              | Extension  | Software            |
+|---------------------|------------|---------------------|
+| B'Energy Meteor Log | .met       | -                   |
+| Pro Tune            | .dlf       | Pro Tune Analyzer   |
+| MegaSquirt ASCII    | .msl       | MegaLogViewer       |
+| MoTeC CSV           | .csv       | MoTeC i2            |
+| Pi ASCII            | .txt       | Cosworth Pi Toolbox |
+| BOSCH Darab ASCII   | .txt       | Bosch WinDarab      |
+| RacePak ASCII       | .txt       | RacePak DataLink II |
+| Excel CSV           | .csv       | Microsoft Excel     |
+| CSV                 | .csv, .tsv | -                   |
 
 ## Command Line Interface
 
@@ -30,7 +31,7 @@ Type `racing-data-converter --help` for a list of options.
 racing-data-converter ./input.csv ./output.dlf --output-format protune
 ```
 
-## Application Programming Interface
+## Application Programming Interface[log0006.dlf](log0006.dlf)
 
 1. Create an input stream. This can be a simple passthrough stream such as `DataFrameStream` or read from a `CsvReader`.
 2. Define the list of channels that you will work with, including information such as the unit of measure.
