@@ -15,7 +15,7 @@ export class MeteorReader implements BaseReader {
   }
 
   get extensions(): string[] {
-    return ['.b20', '.b24', '.met'];
+    return ['.b20', '.b24', '.bin', '.met'];
   }
 
   public createStream(stream: Readable): Promise<MeteorReaderStream> {

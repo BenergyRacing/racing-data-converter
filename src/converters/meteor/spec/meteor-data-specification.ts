@@ -3,9 +3,9 @@ import { DataChannel } from '../../../interfaces/data-channel';
 import { SensorChannel } from '../../../enums/sensor-channel';
 
 /**
- * Represents an B'Energy Meteor Log specification
+ * Represents an B'Energy Meteor Data specification
  */
-export interface MeteorSpecification {
+export interface MeteorDataSpecification {
   /**
    * The list of supported topics
    */

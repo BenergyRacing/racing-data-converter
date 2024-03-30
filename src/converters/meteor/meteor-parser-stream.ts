@@ -1,6 +1,6 @@
 import { Transform, Writable } from 'stream';
 import { FrameType, LogSignature, MeteorGeneralData, toDataFrame, toDataFrames } from './utils';
-import { MeteorSpecification } from './spec/meteor-specification';
+import { MeteorDataSpecification } from './spec/meteor-data-specification';
 
 enum ParserState {
   Signature = 0,
@@ -10,6 +10,12 @@ enum ParserState {
   FrameData = 4
 }
 
+/**
+ * A transform stream that parses the Meteor file format and converts it into data frames.
+ *
+ * This transform stream can read any type of Meteor file, both in version 1 and version 2,
+ * as well as both single topics and composites.
+ */
 export class MeteorParserStream extends Transform {
 
   private buffer: Buffer = Buffer.alloc(0);
@@ -26,7 +32,7 @@ export class MeteorParserStream extends Transform {
   private frameLength: number = 0;
 
   constructor(
-    private readonly spec: MeteorSpecification,
+    private readonly spec: MeteorDataSpecification,
     private readonly rawBufferOutput?: Writable,
   ) {
     super({ readableObjectMode: true, writableObjectMode: false });
@@ -165,7 +171,7 @@ export class MeteorParserStream extends Transform {
 
     // Creates the data frame and pushes it to the transform output
     if (this.frameType === FrameType.SINGLE_TOPIC) {
-      this.push(toDataFrame(this.spec, this.frameTopic, this.frameTime, buffer, 0, length, bigEndian));
+      this.push(toDataFrame(this.spec, this.frameTopic, this.frameTime, buffer, length, bigEndian));
     } else if (this.frameType === FrameType.COMPOSITE) {
       toDataFrames(this.spec, this.frameTopic, this.frameTime, buffer, length, bigEndian)
         .forEach(frame => this.push(frame));

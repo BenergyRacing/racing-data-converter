@@ -3,12 +3,12 @@ import { DataFrame } from '../interfaces/data-frame';
 
 // noinspection JSAnnotator
 /**
- * Uma stream de transform que agrupa data frames em intervalos de tempo.
+ * A transform stream that groups data frames by time intervals.
  *
- * Tópicos não são duplicados caso existam vários data frames no mesmo segundo,
- * apenas a última informação daquele tópico é mantida.
+ * Topics are not duplicated in case there are multiple data frames in the same interval,
+ * only the last information is accounted.
  *
- * Por exemplo, a cada 1 segundo, agrupa todos os data frames emitidos dentro desse segundo em um objeto
+ * For instance, it will group all data frames emitted within one second in a single object.
  */
 export class TimedFrameGrouper extends Transform {
 

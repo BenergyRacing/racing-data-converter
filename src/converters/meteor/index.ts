@@ -1,5 +1,5 @@
 // Meteor Specification
-export * from './spec/meteor-specification';
+export * from './spec/meteor-data-specification';
 export * from './spec/data-format';
 
 // Writer

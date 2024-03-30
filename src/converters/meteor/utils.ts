@@ -1,8 +1,12 @@
 import { DataFormat, DataFormatType } from './spec/data-format';
 import { DataFrame } from '../../interfaces/data-frame';
-import { MeteorSpecification, TopicMetadata } from './spec/meteor-specification';
+import { MeteorDataSpecification, TopicMetadata } from './spec/meteor-data-specification';
 import { MeteorReaderStream } from './meteor-reader.stream';
 
+/**
+ * This is the log signature, it is a fixed set of bytes contained in the start of every Meteor log file.
+ * It was based off the PNG file signature.
+ */
 export const LogSignature = Buffer.from([
   0x89,
   0x42, 0x27, 0x45, 0x4e, 0x45, 0x52, 0x47, 0x59,
@@ -16,28 +20,53 @@ export enum FrameType {
 
 export type MeteorGeneralData = Omit<Omit<MeteorReaderStream, 'stream'>, 'channels'>;
 
-export function toDataFrame(spec: MeteorSpecification, topicId: number, timestamp: number, value: Buffer, offset: number, length: number, bigEndian: boolean = true): DataFrame {
+/**
+ * Reads a value from a Meteor topic data frame and converts it into a single data frame object
+ *
+ * @param spec The meteor data specification
+ * @param topicId The topic identification
+ * @param timestamp The timestamp in milliseconds
+ * @param buffer The value buffer
+ * @param length The length of the value
+ * @param bigEndian Whether it should be parsed as big endian or little endian
+ */
+export function toDataFrame(
+  spec: MeteorDataSpecification,
+  topicId: number,
+  timestamp: number,
+  buffer: Buffer,
+  length: number,
+  bigEndian: boolean = true,
+): DataFrame {
   const topic = spec.topics.find(t => t.id === topicId);
   const channel = topic?.key ?? topicId.toString();
-
-  if (length <= 0) {
-    return {
-      channel,
-      timestamp,
-      value: 0,
-    };
-  }
-
-  const parsedValue = getDataFrameValue(topic, value, offset, length, bigEndian);
+  const value = getDataFrameValue(topic, buffer, 0, length, bigEndian);
 
   return {
     channel,
     timestamp,
-    value: parsedValue,
+    value,
   };
 }
 
-export function toDataFrames(spec: MeteorSpecification, compositeId: number, timestamp: number, value: Buffer, length: number, bigEndian: boolean = true): DataFrame[] {
+/**
+ * Reads a value from a Meteor composite data frame and converts it into multiple data frame objects
+ *
+ * @param spec The meteor data specification
+ * @param compositeId The composite identification
+ * @param timestamp The timestamp in milliseconds
+ * @param buffer The value buffer
+ * @param length The length of the value
+ * @param bigEndian Whether it should be parsed as big endian or little endian
+ */
+export function toDataFrames(
+  spec: MeteorDataSpecification,
+  compositeId: number,
+  timestamp: number,
+  buffer: Buffer,
+  length: number,
+  bigEndian: boolean = true,
+): DataFrame[] {
   const composite = spec.composites.find(c => c.id === compositeId);
 
   if (!composite) {
@@ -56,39 +85,57 @@ export function toDataFrames(spec: MeteorSpecification, compositeId: number, tim
       return {
         channel: topicItem.key,
         timestamp,
-        value: 0,
+        value: NaN,
       };
     }
 
-    const parsedValue = getDataFrameValue(topic, value, offset, topicItem.length, bigEndian);
+    const value = getDataFrameValue(topic, buffer, offset, topicItem.length, bigEndian);
 
     offset += topicItem.length;
 
     return {
       channel: topicItem.key,
       timestamp,
-      value: parsedValue,
+      value,
     };
   });
 }
 
-export function getDataFrameValue(topic: TopicMetadata | undefined, value: Buffer, offset: number, length: number, bigEndian: boolean = true): number {
+/**
+ * Reads a Meteor data frame value and parses it into a number
+ *
+ * @param topic The topic metadata
+ * @param buffer The value buffer
+ * @param offset The value offset
+ * @param length The value length
+ * @param bigEndian Whether the value must be read in big endian or little endian
+ */
+export function getDataFrameValue(
+  topic: TopicMetadata | undefined,
+  buffer: Buffer,
+  offset: number,
+  length: number,
+  bigEndian: boolean = true,
+): number {
+  if (length <= 0 || buffer.length < offset + length)
+    return NaN;
+
   const data = topic?.data;
   const type = data?.type ?? DataFormatType.UnsignedNumber;
 
-  let valueNumber: number | bigint;
+  let value: number | bigint;
 
   if (type === DataFormatType.SignedNumber) {
-    valueNumber = bigEndian
-      ? (length === 8 ? value.readBigInt64BE(offset) : value.readIntBE(offset, length))
-      : (length === 8 ? value.readBigInt64LE(offset) : value.readIntLE(offset, length));
+    value = bigEndian
+      ? (length === 8 ? buffer.readBigInt64BE(offset) : buffer.readIntBE(offset, length))
+      : (length === 8 ? buffer.readBigInt64LE(offset) : buffer.readIntLE(offset, length));
   } else {
-    valueNumber = bigEndian
-      ? (length === 8 ? value.readBigUInt64BE(offset) : value.readUIntBE(offset, length))
-      : (length === 8 ? value.readBigUInt64LE(offset) : value.readUIntLE(offset, length));
+    value = bigEndian
+      ? (length === 8 ? buffer.readBigUInt64BE(offset) : buffer.readUIntBE(offset, length))
+      : (length === 8 ? buffer.readBigUInt64LE(offset) : buffer.readUIntLE(offset, length));
   }
 
-  return convertToValue(valueNumber, data);
+  return convertToValue(value, data);
 }
 
 export function getBufferFromDataFrame(topic: TopicMetadata, value: number): Buffer {
@@ -114,7 +161,12 @@ export function getBufferFromDataFrame(topic: TopicMetadata, value: number): Buf
   return buffer;
 }
 
-
+/**
+ * Calculates the minimum byte length for a number
+ *
+ * @param value The number that must be encoded
+ * @param signed Whether it is signed or unsigned
+ */
 export function getDataByteSize(value: number, signed: boolean): number {
   value = Math.ceil(Math.abs(value)) * (signed ? 1 : 2);
 
@@ -125,11 +177,20 @@ export function getDataByteSize(value: number, signed: boolean): number {
   } else if (value < 0xFFFFFFFF) {
     return 4;
   } else {
-    return 6;//8;
+    // We will consider up to six bytes as we don't support bigints
+    // TODO: bigint support?
+    return 6;
   }
 }
 
+/**
+ * Converts a number from its data format
+ *
+ * @param value The number
+ * @param from The data format
+ */
 export function convertFromValue(value: number | bigint, from: DataFormat | undefined): number {
+  // TODO: bigint support?
   if (typeof value === 'bigint')
     value = Number(value);
 
@@ -143,7 +204,14 @@ export function convertFromValue(value: number | bigint, from: DataFormat | unde
   return (value / multiplier * divisor) - addition;
 }
 
+/**
+ * Converts a number into its data format
+ *
+ * @param value The number
+ * @param to The data format
+ */
 export function convertToValue(value: number | bigint, to: DataFormat | undefined): number {
+  // TODO: bigint support?
   if (typeof value === 'bigint')
     value = Number(value);
 

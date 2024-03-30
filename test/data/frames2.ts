@@ -1,4 +1,4 @@
-import { DataChannel, DataFormatType, DataFrame, MeteorSpecification } from '../../src';
+import { DataChannel, DataFormatType, DataFrame, MeteorDataSpecification } from '../../src';
 
 export const frames2 = {
   channels: [
@@ -24,5 +24,5 @@ export const frames2 = {
       { key: "ch3", id: 3, data: { type: DataFormatType.UnsignedNumber, divisor: 1000 } },
     ],
     composites: [],
-  } as MeteorSpecification,
+  } as MeteorDataSpecification,
 };

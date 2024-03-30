@@ -1,6 +1,9 @@
 import { Transform, TransformCallback } from 'stream';
 
 // noinspection JSAnnotator
+/**
+ * A transform stream that prepends some data, either from a string or from a buffer.
+ */
 export class StreamPrefixer extends Transform {
 
   private hasPrefixed: boolean = false;

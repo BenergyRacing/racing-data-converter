@@ -1,10 +1,10 @@
-import { MeteorSpecification } from './spec/meteor-specification';
+import { MeteorDataSpecification } from './spec/meteor-data-specification';
 
 export interface MeteorReaderOptions {
 
   /**
    * The data specification
    */
-  spec: MeteorSpecification;
+  spec: MeteorDataSpecification;
 
 }

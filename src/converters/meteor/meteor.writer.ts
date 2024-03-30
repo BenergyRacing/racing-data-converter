@@ -29,6 +29,7 @@ export class MeteorWriter implements BaseWriter {
     const date = this.options.date ?? new Date();
     const timeOfDay = date.getHours() * 3600000 + date.getMinutes() * 60000 + date.getSeconds() * 1000 + date.getMilliseconds();
 
+    // The name cannot be empty and must have up to 255 bytes
     let name = Buffer.from(this.options.name || 'LOG', 'utf-8');
 
     if (name.length > 0xFF)

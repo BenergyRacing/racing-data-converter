@@ -1,13 +1,15 @@
-import { MeteorSpecification } from './spec/meteor-specification';
+import { MeteorDataSpecification } from './spec/meteor-data-specification';
 
 export interface MeteorWriterOptions {
   /**
    * The data specification
    */
-  spec: MeteorSpecification;
+  spec: MeteorDataSpecification;
 
   /**
-   * The log name
+   * The log name. Defaults to "LOG".
+   *
+   * Note: The name may have up to 255 bytes, otherwise it will be capped.
    */
   name?: string;
 
