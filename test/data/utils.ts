@@ -1,6 +1,6 @@
 import { DataChannel } from '../../src/interfaces/data-channel';
 import { SensorChannel } from '../../src/enums/sensor-channel';
-import { PassThrough, Readable, Writable } from 'stream';
+import { Readable } from 'stream';
 import { DataFrame } from '../../src/interfaces/data-frame';
 import { BaseWriter } from '../../src/interfaces/base.writer';
 import { DataFrameStream } from '../../src/inputs/data-frame-stream';
@@ -51,6 +51,25 @@ export function getStreamResult(stream: Readable): Promise<string> {
   });
 }
 
+export function getDataFrameStreamResult(stream: Readable): Promise<DataFrame[]> {
+  return new Promise((resolve, reject) => {
+    let data: DataFrame[] = [];
+    stream.on('data', chunk => data.push(chunk));
+    stream.once('end', () => resolve(data));
+    stream.once('error', err => reject(err));
+  });
+}
+
+export function getBufferResult(stream: Readable): Promise<Buffer> {
+  return new Promise((resolve, reject) => {
+    let chunks: Buffer[] = [];
+    stream.on('data', chunk => chunks.push(chunk));
+    stream.once('end', () => resolve(Buffer.concat(chunks)));
+    stream.once('error', err => reject(err));
+  });
+}
+
+
 export async function getWriterOutput(writer: BaseWriter, frames: DataFrame[]): Promise<string> {
   const input = new DataFrameStream();
   const output = writer.createStream(input);
@@ -60,3 +79,4 @@ export async function getWriterOutput(writer: BaseWriter, frames: DataFrame[]): 
 
   return await getStreamResult(output);
 }
+
