@@ -24,6 +24,15 @@ The CLI allows converting without writing a single line of code.
 
 By default, it reads CSV files and outputs any format. The CSV file must have the first column as the timestamp in seconds. Columns can follow the format `Name (unit)` or `Name (unit) [key]`.
 
+### Install
+
+You need NodeJS (16+ is recommended) installed first.
+```sh
+npm install -g racing-data-converter
+```
+
+### Usage
+
 Type `racing-data-converter --help` for a list of options.
 
 ### Example
@@ -39,9 +48,18 @@ racing-data-converter ./input.csv ./output.dlf --output-format protune
 4. Create a writer stream from the writer class, receiving the input stream created earlier.
 5. The file is successfully converted!
 
+### Install
+
+```sh
+npm install racing-data-converter
+```
+
 ### Sample
 
 ```ts
+import { DataFrameStream, ProtuneWriter, SensorChannel } from 'racing-data-converter';
+import * as fs from 'node:fs';
+
 // Creates a plain data frame stream. This will be the input
 const dataFrameStream = new DataFrameStream();
 
