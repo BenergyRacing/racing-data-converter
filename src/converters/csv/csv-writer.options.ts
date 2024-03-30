@@ -31,4 +31,9 @@ export interface CsvWriterOptions extends BaseWriterOptions {
    */
   quotedEmpty?: boolean;
 
+  /**
+   * The timestamp column name
+   */
+  timeColumn?: string;
+
 }

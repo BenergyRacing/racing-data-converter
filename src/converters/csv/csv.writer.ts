@@ -37,7 +37,7 @@ export class CsvWriter implements BaseWriter {
     return [
       {
         key: TimedFrameGrouper.TIMESTAMP_CHANNEL,
-        header: 'Time (ms)',
+        header: this.options.timeColumn || 'Time (ms)',
       },
       ...this.options.channels.map<ColumnOption>(channel => ({
         key: channel.key,
