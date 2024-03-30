@@ -22,17 +22,17 @@ export interface DataFormat {
   // ((base unit + addition) / divisor * multiplier) = unit
 
   /**
-   * The number that must be added to convert this number
+   * The number that must be added in order to convert from binary
    */
   addition?: number;
 
   /**
-   * The number that must be multiplied to convert this number
+   * The number that must be multiplied in order to convert from binary
    */
   multiplier?: number;
 
   /**
-   * The number that must be divided to convert this number
+   * The number that must be divided in order to convert from binary
    */
   divisor?: number;
 }

@@ -84,7 +84,7 @@ export class MeteorParserStream extends Transform {
     let timeOfDay = buffer.readUInt32BE(4);
 
     if (year !== 0)
-      this.dateTime = new Date(year, month, day, timeOfDay / 3600000 % 100, timeOfDay / 60000 % 100, timeOfDay / 1000 % 100, timeOfDay % 1000);
+      this.dateTime = new Date(year + 2000, month, day, timeOfDay / 3600000 % 100, timeOfDay / 60000 % 100, timeOfDay / 1000 % 100, timeOfDay % 1000);
 
     this.nameLength = buffer.readUInt8(8);
 

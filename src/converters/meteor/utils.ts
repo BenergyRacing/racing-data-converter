@@ -89,7 +89,7 @@ export function getDataFrameValue(topic: TopicMetadata | undefined, value: Buffe
 }
 
 export function getBufferFromDataFrame(topic: TopicMetadata, value: number): Buffer {
-  value = convertFromValue(value, topic.data);
+  value = Math.round(convertFromValue(value, topic.data));
 
   const signed = topic.data.type === DataFormatType.SignedNumber;
   const length = getDataByteSize(value, signed);

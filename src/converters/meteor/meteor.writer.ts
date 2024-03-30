@@ -18,7 +18,7 @@ export class MeteorWriter implements BaseWriter {
 
   public createStream(stream: Readable): Transform {
     const meteor = new MeteorFrameStream(this.options.spec);
-    const prefixer = new StreamPrefixer(this.createHeader());
+    const prefixer = new StreamPrefixer(this.createHeader(), true);
 
     return stream.pipe(meteor).pipe(prefixer);
   }
@@ -27,15 +27,19 @@ export class MeteorWriter implements BaseWriter {
     const date = this.options.date ?? new Date();
     const timeOfDay = date.getHours() * 3600000 + date.getMinutes() * 60000 + date.getSeconds() * 1000 + date.getMilliseconds();
 
-    const name = Buffer.from(this.options.name || 'LOG', 'utf-8');
+    let name = Buffer.from(this.options.name || 'LOG', 'utf-8');
+
+    if (name.length > 0xFF)
+      name = name.subarray(0, 0xFF);
+
     const generalInfo = Buffer.alloc(9);
 
     generalInfo.writeUInt8(2, 0); // Version 2
     generalInfo.writeUInt8(date.getDate(), 1);
     generalInfo.writeUInt8(date.getMonth(), 2);
-    generalInfo.writeUInt8(date.getFullYear(), 3);
+    generalInfo.writeUInt8(date.getFullYear() - 2000, 3);
     generalInfo.writeUInt32BE(timeOfDay, 4);
-    generalInfo.writeUInt8(name.length);
+    generalInfo.writeUInt8(name.length, 8);
 
     return Buffer.concat([
       LogSignature,

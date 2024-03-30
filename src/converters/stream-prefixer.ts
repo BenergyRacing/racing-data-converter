@@ -7,8 +7,9 @@ export class StreamPrefixer extends Transform {
 
   constructor(
     private readonly prefix: Buffer | string,
+    isBinary: boolean = false,
   ) {
-    super({ objectMode: false, decodeStrings: false });
+    super({ objectMode: false, decodeStrings: isBinary });
   }
 
   _transform(chunk: any, encoding: BufferEncoding, callback: TransformCallback): void {

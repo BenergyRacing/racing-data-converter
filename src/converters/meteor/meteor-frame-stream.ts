@@ -9,7 +9,7 @@ export class MeteorFrameStream extends Transform {
   constructor(
     private readonly spec: MeteorSpecification,
   ) {
-    super({ writableObjectMode: true, readableObjectMode: false, encoding: 'binary' });
+    super({ writableObjectMode: true, readableObjectMode: false });
   }
 
   _transform(chunk: DataFrame, encoding: BufferEncoding, callback: TransformCallback) {
