@@ -1,6 +1,7 @@
 import { Transform } from 'stream';
+import { BaseReaderStream } from '../../interfaces/base.reader';
 
-export interface CsvReaderStream {
+export interface CsvReaderStream extends BaseReaderStream {
   /**
    * The CSV stream
    */

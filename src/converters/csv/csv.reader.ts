@@ -4,8 +4,9 @@ import { CsvReaderOptions } from './csv-reader.options';
 import { TimedFrameSplitter } from '../timed-frame-splitter';
 import { SensorChannel } from '../../enums/sensor-channel';
 import { CsvReaderStream } from './csv-reader.stream';
+import { BaseReader } from '../../interfaces/base.reader';
 
-export class CsvReader {
+export class CsvReader implements BaseReader {
 
   protected castCsvValue: (value: string, context: CastingContext) => number | string | undefined;
   protected mapColumnToChannel: (column: string) => SensorChannel | string | undefined;
@@ -28,6 +29,10 @@ export class CsvReader {
       this.castCsvValue = (value, context) => context.header ? value : cast(value, context.column.toString());
     else
       this.castCsvValue = (value, context) => context.header ? value : (isNaN(Number(value)) ? undefined : Number(value));
+  }
+
+  public get extensions(): string[] {
+    return ['.csv', '.tsv'];
   }
 
   public async createStream(stream: Readable): Promise<CsvReaderStream> {
