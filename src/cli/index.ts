@@ -14,6 +14,12 @@ export interface CliOptions {
 }
 
 export async function runCli(options: CliOptions): Promise<void> {
+  console.log(`Converting "${options.inputFile}" to "${options.outputFile}"`);
+  console.log(`Format "${options.inputFormat}" to "${options.outputFormat}"`);
+  console.log(`Options files "${options.inputOptionsFile || 'not set'}" to "${options.outputOptionsFile || 'not set'}"`);
+
+  console.log('Preparing...');
+
   const inputOptions = await loadOptionsFile(options.inputOptionsFile);
   const outputOptions = await loadOptionsFile(options.outputOptionsFile);
 
@@ -29,6 +35,8 @@ export async function runCli(options: CliOptions): Promise<void> {
   const writerStream = writer.createStream(readerStream.stream);
 
   writerStream.pipe(outputFileStream);
+
+  console.log('Converting...');
 
   return new Promise((resolve, reject) => {
     outputFileStream.once('finish', () => resolve());

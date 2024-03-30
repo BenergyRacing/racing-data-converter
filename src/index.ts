@@ -14,6 +14,9 @@ export * from './interfaces/base.reader';
 export * from './interfaces/base.writer';
 export * from './interfaces/data-channel';
 export * from './interfaces/data-frame';
+export * from './enums/sensor-channel';
+export * from './enums/sensor-unit';
 
 // Utils
 export * from './utils/channels';
+export * from './inputs/data-frame-stream';
