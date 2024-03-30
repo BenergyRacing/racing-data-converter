@@ -16,7 +16,10 @@ program
   .argument('<output>', 'output file path')
   .addOption(
     new Option('-i, --input-format [format]', 'input file format')
-      .choices([InputFormat.CSV])
+      .choices([
+        InputFormat.CSV,
+        InputFormat.BENERGY_METEOR,
+      ])
       .default(InputFormat.CSV)
   )
   .addOption(
@@ -30,15 +33,16 @@ program
         OutputFormat.PROTUNE,
         OutputFormat.RACE_PAK,
         OutputFormat.WIN_DARAB,
+        OutputFormat.BENERGY_METEOR,
       ])
       .default(OutputFormat.CSV)
   )
   .addOption(
-    new Option('--input-options [options]', 'input options json object')
+    new Option('--input-options-file [path]', 'input options json file')
       .default(null)
   )
   .addOption(
-    new Option('--output-options [options]', 'output options json object')
+    new Option('--output-options-file [path]', 'output options json file')
       .default(null)
   )
   .action((inputFile, outputFile, opts) => {
@@ -47,8 +51,8 @@ program
       outputFile,
       inputFormat: opts.inputFormat,
       outputFormat: opts.outputFormat,
-      inputOptions: opts.inputOptions,
-      outputOptions: opts.outputOptions,
+      inputOptionsFile: opts.inputOptionsFile,
+      outputOptionsFile: opts.outputOptionsFile,
     })
       .then(() => console.log('Done.'))
       .catch((error) => console.error(error));

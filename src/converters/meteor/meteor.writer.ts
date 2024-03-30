@@ -10,6 +10,8 @@ export class MeteorWriter implements BaseWriter {
   constructor(
     private readonly options: MeteorWriterOptions,
   ) {
+    if (!options.spec)
+      throw new Error('The meteor specification object must be defined');
   }
 
   get extension(): string {

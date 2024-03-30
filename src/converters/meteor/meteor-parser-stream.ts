@@ -1,7 +1,6 @@
 import { Transform, Writable } from 'stream';
-import { FrameType, LogSignature, toDataFrame, toDataFrames } from './utils';
+import { FrameType, LogSignature, MeteorGeneralData, toDataFrame, toDataFrames } from './utils';
 import { MeteorSpecification } from './spec/meteor-specification';
-import { MeteorReaderStream } from './meteor-reader.stream';
 
 enum ParserState {
   Signature = 0,
@@ -110,7 +109,7 @@ export class MeteorParserStream extends Transform {
       version: this.version,
       date: this.dateTime,
       name: this.name,
-    } as Omit<MeteorReaderStream, 'stream'>);
+    } as MeteorGeneralData);
 
     this.buffer = buffer.subarray(this.nameLength);
     this.state = ParserState.FrameHeader;

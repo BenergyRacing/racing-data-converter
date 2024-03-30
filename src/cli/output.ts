@@ -1,10 +1,16 @@
 import { BaseWriter } from '../interfaces/base.writer';
-import { CsvWriter, ExcelCsvWriter, MegaSquirtWriter, MotecCsvWriter } from '../index';
+import {
+  CsvWriter,
+  ExcelCsvWriter,
+  MegaSquirtWriter,
+  MeteorWriter,
+  MotecCsvWriter,
+  PiToolboxAsciiWriter,
+  ProtuneWriter,
+  RacePakWriter,
+  WinDarabWriter,
+} from '../index';
 import { DataChannel } from '../interfaces/data-channel';
-import { PiToolboxAsciiWriter } from '../converters/pi-toolbox';
-import { ProtuneWriter } from '../converters/protune';
-import { RacePakWriter } from '../converters/race-pak';
-import { WinDarabWriter } from '../converters/win-darab';
 
 export enum OutputFormat {
   CSV = 'csv',
@@ -15,6 +21,7 @@ export enum OutputFormat {
   PROTUNE = 'protune',
   RACE_PAK = 'race-pak',
   WIN_DARAB = 'win-darab',
+  BENERGY_METEOR = 'benergy-meteor',
 }
 
 export function createOutput(format: OutputFormat, channels: DataChannel[], options: any): BaseWriter {
@@ -46,6 +53,9 @@ export function createOutput(format: OutputFormat, channels: DataChannel[], opti
 
   if (format === OutputFormat.WIN_DARAB)
     return new WinDarabWriter(options);
+
+  if (format === OutputFormat.BENERGY_METEOR)
+    return new MeteorWriter(options);
 
   throw new Error('Unknown output format')
 }

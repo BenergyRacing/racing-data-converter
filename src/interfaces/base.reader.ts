@@ -1,4 +1,5 @@
 import { Readable, Transform } from 'stream';
+import { DataChannel } from './data-channel';
 
 export interface BaseReader {
 
@@ -22,4 +23,9 @@ export interface BaseReaderStream {
    * The dataframe stream
    */
   stream: Transform;
+
+  /**
+   * The list of channels
+   */
+  channels: DataChannel[];
 }

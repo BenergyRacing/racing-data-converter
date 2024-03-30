@@ -2,14 +2,15 @@ import { Readable } from 'stream';
 import { CastingContext, parse } from 'csv-parse';
 import { CsvReaderOptions } from './csv-reader.options';
 import { TimedFrameSplitter } from '../timed-frame-splitter';
-import { SensorChannel } from '../../enums/sensor-channel';
 import { CsvReaderStream } from './csv-reader.stream';
 import { BaseReader } from '../../interfaces/base.reader';
+import { DataChannel } from '../../interfaces/data-channel';
+import { toDataChannel } from '../../utils/channels';
 
 export class CsvReader implements BaseReader {
 
   protected castCsvValue: (value: string, context: CastingContext) => number | string | undefined;
-  protected mapColumnToChannel: (column: string) => SensorChannel | string | undefined;
+  protected mapColumnToChannel: (column: string) => DataChannel | undefined;
 
   constructor(
     protected readonly options: CsvReaderOptions,
@@ -17,18 +18,18 @@ export class CsvReader implements BaseReader {
     const map = options.columnToChannelMap;
 
     if (typeof map === 'function')
-      this.mapColumnToChannel = map;
+      this.mapColumnToChannel = (column) => toDataChannel(map(column));
     else if (typeof map === 'object')
-      this.mapColumnToChannel = (column) => map[column];
+      this.mapColumnToChannel = (column) => toDataChannel(map[column]);
     else
-      this.mapColumnToChannel = (column) => column;
+      this.mapColumnToChannel = (column) => toDataChannel(column);
 
     const cast = options.cast;
 
     if (typeof cast === 'function')
       this.castCsvValue = (value, context) => context.header ? value : cast(value, context.column.toString());
     else
-      this.castCsvValue = (value, context) => context.header ? value : (isNaN(Number(value)) ? undefined : Number(value));
+      this.castCsvValue = (value, context) => context.header ? value : (isNaN(Number(value)) || value.length === 0 ? undefined : Number(value));
   }
 
   public get extensions(): string[] {
@@ -61,7 +62,7 @@ export class CsvReader implements BaseReader {
         resolve({
           stream: csv,
           columns: columns,
-          channels: channels as string[],
+          channels: channels as DataChannel[],
         });
 
         csv.off('error', reject);

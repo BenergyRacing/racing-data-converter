@@ -38,3 +38,18 @@ export function parseDataChannelFromName(name: string): DataChannel {
     unit: match[2],
   };
 }
+
+/**
+ * Converts a data channel to the data channel object.
+ *
+ * @param key The key, being a data channel object, a string or undefined
+ */
+export function toDataChannel(key: DataChannel | string | undefined): DataChannel | undefined {
+  if (typeof key === 'object')
+    return key;
+
+  if (typeof key === 'string')
+    return { key };
+
+  return undefined;
+}

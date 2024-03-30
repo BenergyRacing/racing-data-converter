@@ -1,6 +1,7 @@
 import { Transform } from 'stream';
 import { DataFrame } from '../interfaces/data-frame';
 import { SensorChannel } from '../enums/sensor-channel';
+import { DataChannel } from '../interfaces/data-channel';
 
 // noinspection JSAnnotator
 /**
@@ -10,7 +11,7 @@ export class TimedFrameSplitter extends Transform {
 
   constructor(
     private readonly timestampKey: string,
-    private readonly mapKeyToChannel: (key: string) => SensorChannel | string | undefined,
+    private readonly mapKeyToChannel: (key: string) => DataChannel | undefined,
   ) {
     super({ objectMode: true });
   }
@@ -29,7 +30,7 @@ export class TimedFrameSplitter extends Transform {
       if (typeof value !== 'number')
         continue;
 
-      const channel = this.mapKeyToChannel(key);
+      const channel = this.mapKeyToChannel(key)?.key;
 
       if (!channel)
         continue;

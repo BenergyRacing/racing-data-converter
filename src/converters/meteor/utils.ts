@@ -1,6 +1,7 @@
 import { DataFormat, DataFormatType } from './spec/data-format';
 import { DataFrame } from '../../interfaces/data-frame';
 import { MeteorSpecification, TopicMetadata } from './spec/meteor-specification';
+import { MeteorReaderStream } from './meteor-reader.stream';
 
 export const LogSignature = Buffer.from([
   0x89,
@@ -12,6 +13,8 @@ export enum FrameType {
   SINGLE_TOPIC = 1,
   COMPOSITE = 2,
 }
+
+export type MeteorGeneralData = Omit<Omit<MeteorReaderStream, 'stream'>, 'channels'>;
 
 export function toDataFrame(spec: MeteorSpecification, topicId: number, timestamp: number, value: Buffer, offset: number, length: number, bigEndian: boolean = true): DataFrame {
   const topic = spec.topics.find(t => t.id === topicId);

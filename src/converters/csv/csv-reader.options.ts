@@ -46,6 +46,6 @@ export interface CsvReaderOptions {
    *
    * Defaults to column names being their respective channels
    */
-  columnToChannelMap?: Record<string, SensorChannel | string> | ((column: string) => SensorChannel | string | undefined);
+  columnToChannelMap?: Record<string, DataChannel | SensorChannel | string> | ((column: string) => DataChannel | SensorChannel | string | undefined);
 
 }
