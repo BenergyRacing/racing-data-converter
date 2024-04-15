@@ -11,7 +11,10 @@ export enum InputFormat {
   JSON = 'json',
 }
 
-export function getFormatFromExtension(filename: string): [InputFormat, any] {
+export function getInputFormatAndOptions(format: string, filename: string): [InputFormat, any] {
+  if (format !== InputFormat.AUTO)
+    return [format as InputFormat, {}];
+
   filename = filename.toLowerCase();
 
   if (filename.endsWith('.csv'))
@@ -29,14 +32,7 @@ export function getFormatFromExtension(filename: string): [InputFormat, any] {
   throw new Error('Could not find an input format based on the file extension.');
 }
 
-export function createInput(format: InputFormat, filename: string, options: any): BaseReader {
-  if (format === InputFormat.AUTO) {
-    const [extensionFormat, defaultOptions] = getFormatFromExtension(filename);
-
-    format = extensionFormat;
-    options = { ...defaultOptions, ...options };
-  }
-
+export function createInput(format: InputFormat, options: any): BaseReader {
   if (format === InputFormat.CSV)
     return new CsvReader({
       timeColumn: (columns) => columns[0],

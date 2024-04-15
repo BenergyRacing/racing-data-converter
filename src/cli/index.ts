@@ -1,6 +1,5 @@
-import { parseDataChannelFromName } from '../utils/channels';
-import { createInput, InputFormat } from './input';
-import { createOutput, OutputFormat } from './output';
+import { createInput, getInputFormatAndOptions, InputFormat } from './input';
+import { createOutput, getOutputFormatAndOptions, OutputFormat } from './output';
 import * as fs from 'fs';
 import * as fsPromises from 'fs/promises';
 
@@ -15,7 +14,11 @@ export interface CliOptions {
 
 export async function runCli(options: CliOptions): Promise<void> {
   console.log(`Converting "${options.inputFile}" to "${options.outputFile}"`);
-  console.log(`Format "${options.inputFormat}" to "${options.outputFormat}"`);
+
+  const [inFormat, defaultInOpts] = getInputFormatAndOptions(options.inputFormat, options.inputFile);
+  const [outFormat, defaultOutOpts] = getOutputFormatAndOptions(options.outputFormat, options.outputFile);
+
+  console.log(`Format "${inFormat}" to "${outFormat}"`);
   console.log(`Options files "${options.inputOptionsFile || 'not set'}" to "${options.outputOptionsFile || 'not set'}"`);
 
   console.log('Preparing...');
@@ -23,13 +26,13 @@ export async function runCli(options: CliOptions): Promise<void> {
   const inputOptions = await loadOptionsFile(options.inputOptionsFile);
   const outputOptions = await loadOptionsFile(options.outputOptionsFile);
 
-  const reader = createInput(options.inputFormat as InputFormat, options.inputFile, inputOptions);
+  const reader = createInput(inFormat, { ...defaultInOpts, ...inputOptions });
   const inputFileStream = fs.createReadStream(options.inputFile);
 
   const readerStream = await reader.createStream(inputFileStream);
   const channels = readerStream.channels;
 
-  const writer = createOutput(options.outputFormat as OutputFormat, options.outputFile, channels, outputOptions);
+  const writer = createOutput(outFormat, { ...defaultOutOpts, ...outputOptions, channels });
   const outputFileStream = fs.createWriteStream(options.outputFile);
 
   const writerStream = writer.createStream(readerStream.stream);

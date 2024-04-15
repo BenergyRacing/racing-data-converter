@@ -28,7 +28,10 @@ export enum OutputFormat {
   JSON = 'json',
 }
 
-export function getFormatFromExtension(filename: string): [OutputFormat, any] {
+export function getOutputFormatAndOptions(format: string, filename: string): [OutputFormat, any] {
+  if (format !== OutputFormat.AUTO)
+    return [format as OutputFormat, {}];
+
   filename = filename.toLowerCase();
 
   if (filename.endsWith('.csv'))
@@ -52,19 +55,7 @@ export function getFormatFromExtension(filename: string): [OutputFormat, any] {
   throw new Error('Could not find an output format based on the file extension.');
 }
 
-export function createOutput(format: OutputFormat, filename: string, channels: DataChannel[], options: any): BaseWriter {
-  options = {
-    ...options,
-    channels,
-  };
-
-  if (format === OutputFormat.AUTO) {
-    const [extensionFormat, defaultOptions] = getFormatFromExtension(filename);
-
-    format = extensionFormat;
-    options = { ...defaultOptions, ...options };
-  }
-
+export function createOutput(format: OutputFormat, options: any): BaseWriter {
   if (format === OutputFormat.CSV)
     return new CsvWriter(options);
 
