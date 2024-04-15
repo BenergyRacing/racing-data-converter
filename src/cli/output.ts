@@ -1,3 +1,4 @@
+import * as path from 'path';
 import { BaseWriter } from '../interfaces/base.writer';
 import {
   CsvWriter,
@@ -12,7 +13,6 @@ import {
   RacePakWriter,
   WinDarabWriter,
 } from '../index';
-import { DataChannel } from '../interfaces/data-channel';
 
 export enum OutputFormat {
   AUTO = 'auto',
@@ -53,6 +53,21 @@ export function getOutputFormatAndOptions(format: string, filename: string): [Ou
     return [OutputFormat.JSON, {}];
 
   throw new Error('Could not find an output format based on the file extension.');
+}
+
+export function getOutputFilename(outputFile: string, inputFile: string, writer: BaseWriter): string {
+  if (!outputFile.includes('@'))
+    return outputFile;
+
+  const suffix = outputFile.endsWith(writer.extension) ? '' : writer.extension;
+  const basename = path.basename(inputFile);
+  const outputName = outputFile.replace('@', basename + suffix);
+
+  // In case the output file is the same as the input, we'll prefix it with an underline
+  if (outputName === inputFile)
+    return outputFile.replace('@', '_' + basename + suffix);
+
+  return outputName;
 }
 
 export function createOutput(format: OutputFormat, options: any): BaseWriter {

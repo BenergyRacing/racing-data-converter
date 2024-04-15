@@ -13,7 +13,7 @@ program
   .version('1.2.0')
   .showHelpAfterError()
   .argument('<input>', 'input file path')
-  .argument('<output>', 'output file path')
+  .argument('<output>', 'output file path. use "@" to use the input file name')
   .addOption(
     new Option('-i, --input-format [format]', 'input file format')
       .choices([
@@ -49,6 +49,10 @@ program
     new Option('--output-options-file [path]', 'output options json file')
       .default(null)
   )
+  .addOption(
+    new Option('-d, --directory', 'whether the input and output paths are directories, in which case all files will be converted')
+      .default(false)
+  )
   .action((inputFile, outputFile, opts) => {
     runCli({
       inputFile,
@@ -57,9 +61,10 @@ program
       outputFormat: opts.outputFormat,
       inputOptionsFile: opts.inputOptionsFile,
       outputOptionsFile: opts.outputOptionsFile,
+      directory: opts.directory,
     })
       .then(() => console.log('Done.'))
-      .catch((error) => console.error(error));
-  });
+      .catch((error) => console.error(error?.toString()));
+  })
 
 program.parse();
