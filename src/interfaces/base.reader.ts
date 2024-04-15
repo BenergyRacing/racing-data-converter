@@ -22,7 +22,7 @@ export interface BaseReaderStream {
   /**
    * The dataframe stream
    */
-  stream: Transform;
+  stream: Readable;
 
   /**
    * The list of channels

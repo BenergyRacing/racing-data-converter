@@ -4,19 +4,20 @@ Converts time series data into popular motorsport Data Logger formats.
 
 This library was developed at [B'Energy Racing](https://benergyracing.com.br), a Formula SAE Electric Team from the [Facens University Center](https://facens.br).
 
-## Outputs supported
+## Formats supported
 
-| Format              | Extension  | Software            |
-|---------------------|------------|---------------------|
-| Pro Tune            | .dlf       | Pro Tune Analyzer   |
-| MegaSquirt ASCII    | .msl       | MegaLogViewer       |
-| MoTeC CSV           | .csv       | MoTeC i2            |
-| Pi ASCII            | .txt       | Cosworth Pi Toolbox |
-| BOSCH Darab ASCII   | .txt       | Bosch WinDarab      |
-| RacePak ASCII       | .txt       | RacePak DataLink II |
-| Excel CSV           | .csv       | Microsoft Excel     |
-| B'Energy Meteor Log | .met       | -                   |
-| CSV                 | .csv, .tsv | -                   |
+| Format                 | Extension  | Software            | I/O Supported |
+|------------------------|------------|---------------------|---------------|
+| Pro Tune               | .dlf       | Pro Tune Analyzer   | Output        |
+| MegaSquirt ASCII       | .msl       | MegaLogViewer       | Output        |
+| MoTeC CSV              | .csv       | MoTeC i2            | Output        |
+| Pi ASCII               | .txt       | Cosworth Pi Toolbox | Output        |
+| BOSCH Darab ASCII      | .txt       | Bosch WinDarab      | Output        |
+| RacePak ASCII          | .txt       | RacePak DataLink II | Output        |
+| Excel CSV              | .csv       | Microsoft Excel     | Output        |
+| CSV                    | .csv, .tsv | -                   | Input/Output  |
+| B'Energy Meteor Log    | .met       | -                   | Input/Output  |
+| JSON (raw data frames) | .json      | -                   | Input/Output  |
 
 ## Command Line Interface
 
@@ -42,9 +43,9 @@ racing-data-converter ./input.csv ./output.dlf --output-format protune
 
 ## Application Programming Interface
 
-1. Create an input stream. This can be a simple passthrough stream such as `DataFrameStream` or read from a `CsvReader` or a `MeteorReader`.
+1. Create an input stream. This can be a simple passthrough stream such as `DataFrameStream` or read from a `CsvReader`, `MeteorReader` or a `JsonReader`.
 2. Define the list of channels that you will work with, including information such as the unit of measure.
-3. Create a writer. This can be a `CsvWriter`, `MeteorWriter`, `ExcelCsvWriter`, `MegaSquirtWriter`, `MotecCsvWriter`, `PiToolboxAsciiWriter`, `ProtuneWriter`, `RacePakWriter`, `WinDarabWriter`.
+3. Create a writer. This can be a `CsvWriter`, `MeteorWriter`, `ExcelCsvWriter`, `MegaSquirtWriter`, `MotecCsvWriter`, `PiToolboxAsciiWriter`, `ProtuneWriter`, `RacePakWriter`, `WinDarabWriter` or a `JsonWriter`.
 4. Create a writer stream from the writer class, receiving the input stream created earlier.
 5. The file is successfully converted!
 

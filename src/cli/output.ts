@@ -3,6 +3,7 @@ import {
   CsvWriter,
   CsvWriterOptions,
   ExcelCsvWriter,
+  JsonWriter,
   MegaSquirtWriter,
   MeteorWriter,
   MotecCsvWriter,
@@ -24,6 +25,7 @@ export enum OutputFormat {
   RACE_PAK = 'race-pak',
   WIN_DARAB = 'win-darab',
   BENERGY_METEOR = 'benergy-meteor',
+  JSON = 'json',
 }
 
 export function getFormatFromExtension(filename: string): [OutputFormat, any] {
@@ -43,6 +45,9 @@ export function getFormatFromExtension(filename: string): [OutputFormat, any] {
 
   if (filename.endsWith('.msl'))
     return [OutputFormat.MEGA_SQUIRT, {}];
+
+  if (filename.endsWith('.json'))
+    return [OutputFormat.JSON, {}];
 
   throw new Error('Could not find an output format based on the file extension.');
 }
@@ -86,6 +91,9 @@ export function createOutput(format: OutputFormat, filename: string, channels: D
 
   if (format === OutputFormat.BENERGY_METEOR)
     return new MeteorWriter(options);
+
+  if (format === OutputFormat.JSON)
+    return new JsonWriter(options);
 
   throw new Error('Unknown output format');
 }

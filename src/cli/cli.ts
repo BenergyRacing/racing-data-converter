@@ -20,6 +20,7 @@ program
         InputFormat.AUTO,
         InputFormat.CSV,
         InputFormat.BENERGY_METEOR,
+        InputFormat.JSON,
       ])
       .default(InputFormat.AUTO)
   )
@@ -36,6 +37,7 @@ program
         OutputFormat.RACE_PAK,
         OutputFormat.WIN_DARAB,
         OutputFormat.BENERGY_METEOR,
+        OutputFormat.JSON,
       ])
       .default(OutputFormat.AUTO)
   )

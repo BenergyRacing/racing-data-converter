@@ -1,6 +1,7 @@
 // Converters
 export * from './converters/csv';
 export * from './converters/excel';
+export * from './converters/json';
 export * from './converters/mega-squirt';
 export * from './converters/meteor';
 export * from './converters/motec';
