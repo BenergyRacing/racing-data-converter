@@ -17,14 +17,16 @@ program
   .addOption(
     new Option('-i, --input-format [format]', 'input file format')
       .choices([
+        InputFormat.AUTO,
         InputFormat.CSV,
         InputFormat.BENERGY_METEOR,
       ])
-      .default(InputFormat.CSV)
+      .default(InputFormat.AUTO)
   )
   .addOption(
     new Option('-o, --output-format [format]', 'output file format')
       .choices([
+        OutputFormat.AUTO,
         OutputFormat.CSV,
         OutputFormat.EXCEL_CSV,
         OutputFormat.MEGA_SQUIRT,
@@ -35,7 +37,7 @@ program
         OutputFormat.WIN_DARAB,
         OutputFormat.BENERGY_METEOR,
       ])
-      .default(OutputFormat.CSV)
+      .default(OutputFormat.AUTO)
   )
   .addOption(
     new Option('--input-options-file [path]', 'input options json file')

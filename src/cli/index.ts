@@ -23,13 +23,13 @@ export async function runCli(options: CliOptions): Promise<void> {
   const inputOptions = await loadOptionsFile(options.inputOptionsFile);
   const outputOptions = await loadOptionsFile(options.outputOptionsFile);
 
-  const reader = createInput(options.inputFormat as InputFormat, inputOptions);
+  const reader = createInput(options.inputFormat as InputFormat, options.inputFile, inputOptions);
   const inputFileStream = fs.createReadStream(options.inputFile);
 
   const readerStream = await reader.createStream(inputFileStream);
   const channels = readerStream.channels;
 
-  const writer = createOutput(options.outputFormat as OutputFormat, channels, outputOptions);
+  const writer = createOutput(options.outputFormat as OutputFormat, options.outputFile, channels, outputOptions);
   const outputFileStream = fs.createWriteStream(options.outputFile);
 
   const writerStream = writer.createStream(readerStream.stream);

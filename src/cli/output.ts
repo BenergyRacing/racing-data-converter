@@ -1,6 +1,7 @@
 import { BaseWriter } from '../interfaces/base.writer';
 import {
   CsvWriter,
+  CsvWriterOptions,
   ExcelCsvWriter,
   MegaSquirtWriter,
   MeteorWriter,
@@ -13,6 +14,7 @@ import {
 import { DataChannel } from '../interfaces/data-channel';
 
 export enum OutputFormat {
+  AUTO = 'auto',
   CSV = 'csv',
   EXCEL_CSV = 'excel-csv',
   MEGA_SQUIRT = 'mega-squirt',
@@ -24,11 +26,39 @@ export enum OutputFormat {
   BENERGY_METEOR = 'benergy-meteor',
 }
 
-export function createOutput(format: OutputFormat, channels: DataChannel[], options: any): BaseWriter {
+export function getFormatFromExtension(filename: string): [OutputFormat, any] {
+  filename = filename.toLowerCase();
+
+  if (filename.endsWith('.csv'))
+    return [OutputFormat.CSV, {}];
+
+  if (filename.endsWith('.tsv'))
+    return [OutputFormat.CSV, { delimiter: '\t' } as CsvWriterOptions];
+
+  if (filename.endsWith('.met'))
+    return [OutputFormat.BENERGY_METEOR, {}];
+
+  if (filename.endsWith('.dlf'))
+    return [OutputFormat.PROTUNE, {}];
+
+  if (filename.endsWith('.msl'))
+    return [OutputFormat.MEGA_SQUIRT, {}];
+
+  throw new Error('Could not find an output format based on the file extension.');
+}
+
+export function createOutput(format: OutputFormat, filename: string, channels: DataChannel[], options: any): BaseWriter {
   options = {
     ...options,
     channels,
   };
+
+  if (format === OutputFormat.AUTO) {
+    const [extensionFormat, defaultOptions] = getFormatFromExtension(filename);
+
+    format = extensionFormat;
+    options = { ...defaultOptions, ...options };
+  }
 
   if (format === OutputFormat.CSV)
     return new CsvWriter(options);
@@ -57,5 +87,5 @@ export function createOutput(format: OutputFormat, channels: DataChannel[], opti
   if (format === OutputFormat.BENERGY_METEOR)
     return new MeteorWriter(options);
 
-  throw new Error('Unknown output format')
+  throw new Error('Unknown output format');
 }
