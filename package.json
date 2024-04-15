@@ -11,6 +11,7 @@
     "test": "jest",
     "test:csv": "ts-node test/samples/test-csv.ts",
     "test:excel-csv": "ts-node test/samples/test-excel-csv.ts",
+    "test:json": "ts-node test/samples/test-json.ts",
     "test:mega-squirt": "ts-node test/samples/test-mega-squirt.ts",
     "test:meteor": "ts-node test/samples/test-meteor.ts",
     "test:protune": "ts-node test/samples/test-protune.ts",
