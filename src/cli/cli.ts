@@ -10,7 +10,7 @@ const program = new Command();
 program
   .name('racing-data-converter')
   .description('Convert time series data into formats from popular motorsport data analysis software')
-  .version('1.1.1')
+  .version('1.2.0')
   .showHelpAfterError()
   .argument('<input>', 'input file path')
   .argument('<output>', 'output file path')

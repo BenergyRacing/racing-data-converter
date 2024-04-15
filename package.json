@@ -1,9 +1,13 @@
 {
   "name": "racing-data-converter",
-  "version": "1.1.1",
+  "version": "1.2.0",
   "description": "Converts motorsport data into formats from popular data analysis software",
+  "author": "Guilherme Chaguri",
+  "license": "GPL-2.0",
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
+  "bin": "./lib/cli/cli.js",
+  "man": ["./man/racing-data-converter.1"],
   "scripts": {
     "cli": "ts-node ./src/cli/cli.ts",
     "build": "tsc",
@@ -21,10 +25,6 @@
     "test:race-pak": "ts-node test/samples/test-race-pak.ts",
     "test:readme": "ts-node test/samples/test-readme.ts"
   },
-  "bin": "./lib/cli/cli.js",
-  "man": ["./man/racing-data-converter.1"],
-  "author": "Guilherme Chaguri",
-  "license": "GPL-2.0",
   "files": [
     "lib/**/*",
     "man/**/*"
