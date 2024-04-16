@@ -21,7 +21,7 @@ export interface ProtuneWriterOptions extends BaseWriterOptions {
 
   numberOfShows?: number;
   trackLabel?: string;
-  maxSpeed?: string; // TODO better typing
+  maxSpeed?: number;
   bestLap?: number;
   numberOfLaps?: number;
 

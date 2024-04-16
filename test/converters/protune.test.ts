@@ -4,31 +4,17 @@ import { frames1 } from '../data/frames1';
 
 const frames1Result = `#V2
 #SERIALNUMBER 
-#MAINCOMMENT
-#ENDMAINCOMMENT
-#LOGID
-#ENDLOGID
 #DASHVERSION
 FW:05912
 #ENDDASHVERSION
-#FILTERCHANNEL
-#ENDFILTERCHANNEL
-#DASHTRIGGERPOINT
-#ENDDASHTRIGGERPOINT
-#DASHREFERENCESPOINTS
-#ENDDASHREFERENCESPOINTS
-#NUMBEROFSHOWS 
 #TRACKLABEL ECPA
-#MAXSPEED 
-#BESTLAP 
-#NUMBEROFLAPS 
 #DATASTART
-Datalog Time ; Channel 1 ; Channel 2 ; Channel "3" ; 
-seg. ;  ; m ;  ; 
-0,000A10,00AA
-0,010A30,00A20,00A
+Datalog Time;Channel 1;Channel 2;Channel "3";
+seg.;;m;;
+0,000A10,00A0,00A0,00
+0,010A30,00A20,00A0,00
 0,040A40,00A20,00A0,14
-$`;
+`;
 
 test('protune conversion', async () => {
   const writer = new ProtuneWriter({

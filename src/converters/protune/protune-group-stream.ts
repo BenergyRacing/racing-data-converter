@@ -22,8 +22,4 @@ export class ProtuneGroupStream extends Transform {
 
     callback(null, row);
   }
-
-  _flush(callback: TransformCallback) {
-    callback(null, '$');
-  }
 }

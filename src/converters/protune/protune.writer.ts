@@ -37,39 +37,68 @@ export class ProtuneWriter implements BaseWriter {
 
     header += '#V2\n';
     header += '#SERIALNUMBER ' + formatProtuneString(opt.serialNumber) + '\n';
-    header += '#MAINCOMMENT\n';
-    header += formatProtuneMultilineString(opt.mainComment);
-    header += '#ENDMAINCOMMENT\n';
-    header += '#LOGID\n';
-    header += formatProtuneMultilineString(opt.logId);
-    header += '#ENDLOGID\n';
-    header += '#DASHVERSION\n';
-    header += formatProtuneMultilineString(opt.dashVersion || 'FW:05912');
-    header += '#ENDDASHVERSION\n';
-    header += '#FILTERCHANNEL\n';
-    header += formatProtuneMultilineString(opt.filterChannel);
-    header += '#ENDFILTERCHANNEL\n';
-    header += '#DASHTRIGGERPOINT\n';
-    header += formatProtuneMultilineString(opt.dashTriggerPoint);
-    header += '#ENDDASHTRIGGERPOINT\n';
-    header += '#DASHREFERENCESPOINTS\n';
-    header += formatProtuneMultilineString(opt.dashReferencePoints);
-    header += '#ENDDASHREFERENCESPOINTS\n';
-    header += '#NUMBEROFSHOWS ' + formatProtuneNumber(opt.numberOfShows, 0) + '\n';
-    header += '#TRACKLABEL ' + formatProtuneString(opt.trackLabel || 'Desconhecido') + '\n';
-    header += '#MAXSPEED ' + formatProtuneString(opt.maxSpeed) + '\n';
-    header += '#BESTLAP ' + formatProtuneNumber(opt.bestLap, 0) + '\n';
-    header += '#NUMBEROFLAPS ' + formatProtuneNumber(opt.numberOfLaps, 0) + '\n';
+
+    if (opt.mainComment) {
+      header += '#MAINCOMMENT\n';
+      header += formatProtuneMultilineString(opt.mainComment);
+      header += '#ENDMAINCOMMENT\n';
+    }
+
+    if (opt.logId) {
+      header += '#LOGID\n';
+      header += formatProtuneMultilineString(opt.logId);
+      header += '#ENDLOGID\n';
+    }
+
+    if (opt.dashVersion) {
+      header += '#DASHVERSION\n';
+      header += formatProtuneMultilineString(opt.dashVersion || 'FW:05912');
+      header += '#ENDDASHVERSION\n';
+    }
+
+    if (opt.filterChannel) {
+      header += '#FILTERCHANNEL\n';
+      header += formatProtuneMultilineString(opt.filterChannel);
+      header += '#ENDFILTERCHANNEL\n';
+    }
+
+    if (opt.dashTriggerPoint) {
+      header += '#DASHTRIGGERPOINT\n';
+      header += formatProtuneMultilineString(opt.dashTriggerPoint);
+      header += '#ENDDASHTRIGGERPOINT\n';
+    }
+
+    if (opt.dashReferencePoints) {
+      header += '#DASHREFERENCESPOINTS\n';
+      header += formatProtuneMultilineString(opt.dashReferencePoints);
+      header += '#ENDDASHREFERENCESPOINTS\n';
+    }
+
+    if (opt.numberOfShows !== undefined)
+      header += '#NUMBEROFSHOWS ' + formatProtuneNumber(opt.numberOfShows, 0) + '\n';
+
+    if (opt.trackLabel)
+      header += '#TRACKLABEL ' + formatProtuneString(opt.trackLabel || 'Desconhecido') + '\n';
+
+    if (opt.maxSpeed !== undefined)
+      header += '#MAXSPEED ' + formatProtuneNumber(opt.maxSpeed, 1) + '\n';
+
+    if (opt.bestLap !== undefined)
+      header += '#BESTLAP ' + formatProtuneNumber(opt.bestLap, 0) + '\n';
+
+    if (opt.numberOfLaps !== undefined)
+      header += '#NUMBEROFLAPS ' + formatProtuneNumber(opt.numberOfLaps, 0) + '\n';
+
     header += '#DATASTART\n';
 
     // Columns
-    header += 'Datalog Time ; ';
-    header += this.options.channels.map(channel => formatProtuneChannelName(channel) + ' ; ').join('');
+    header += 'Datalog Time;';
+    header += this.options.channels.map(channel => formatProtuneChannelName(channel) + ';').join('');
     header += '\n';
 
     // Units
-    header += 'seg. ; ';
-    header += this.options.channels.map(channel => formatProtuneUnit(channel) + ' ; ').join('');
+    header += 'seg.;';
+    header += this.options.channels.map(channel => formatProtuneUnit(channel) + ';').join('');
     header += '\n';
 
     return header;
