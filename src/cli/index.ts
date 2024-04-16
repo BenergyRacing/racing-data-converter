@@ -37,7 +37,7 @@ export async function prepare(options: CliOptions): Promise<ConversionOptions> {
   const [outFormat, defaultOutOpts] = getOutputFormatAndOptions(options.outputFormat, options.outputFile);
 
   console.log(`Format "${inFormat}" to "${outFormat}"`);
-  console.log(`Options files "${options.inputOptionsFile || 'not set'}" to "${options.outputOptionsFile || 'not set'}"`);
+  console.log(`Options files "${options.inputOptionsFile || '(default options)'}" to "${options.outputOptionsFile || '(default options)'}"`);
 
   console.log('Preparing...');
 
@@ -64,7 +64,7 @@ export async function convert(options: ConversionOptions): Promise<void> {
   const writer = createOutput(options.outputFormat, { ...options.outputOptions, channels });
   const outputFile = getOutputFilename(options.outputFile, options.inputFile, writer);
 
-  await fsPromises.mkdir(path.dirname(outputFile));
+  await fsPromises.mkdir(path.dirname(outputFile)).catch(() => undefined);
 
   const outputFileStream = fs.createWriteStream(outputFile);
 
