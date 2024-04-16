@@ -7,7 +7,7 @@ export function formatProtuneString(value: string | undefined): string {
   if (!value)
     return '';
 
-  return value.replace(/;|\n/g, '');
+  return value.replace(/[;\n]/g, '');
 }
 
 export function formatProtuneMultilineString(value: string | undefined): string {

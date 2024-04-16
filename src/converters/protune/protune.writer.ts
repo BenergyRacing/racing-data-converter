@@ -52,7 +52,7 @@ export class ProtuneWriter implements BaseWriter {
 
     if (opt.dashVersion) {
       header += '#DASHVERSION\n';
-      header += formatProtuneMultilineString(opt.dashVersion || 'FW:05912');
+      header += formatProtuneMultilineString(opt.dashVersion);
       header += '#ENDDASHVERSION\n';
     }
 
@@ -78,7 +78,7 @@ export class ProtuneWriter implements BaseWriter {
       header += '#NUMBEROFSHOWS ' + formatProtuneNumber(opt.numberOfShows, 0) + '\n';
 
     if (opt.trackLabel)
-      header += '#TRACKLABEL ' + formatProtuneString(opt.trackLabel || 'Desconhecido') + '\n';
+      header += '#TRACKLABEL ' + formatProtuneString(opt.trackLabel) + '\n';
 
     if (opt.maxSpeed !== undefined)
       header += '#MAXSPEED ' + formatProtuneNumber(opt.maxSpeed, 1) + '\n';

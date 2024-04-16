@@ -12,17 +12,43 @@ export interface ProtuneWriterOptions extends BaseWriterOptions {
    */
   serialNumber?: string;
 
+  /**
+   * Description of the log file
+   */
   mainComment?: string;
-  logId?: string;
+
+  /**
+   * The Pro Tune firmware version (e.g. "FW:05912")
+   */
   dashVersion?: string;
+
+  /**
+   * The amount of lines the final file will have
+   */
+  numberOfShows?: number;
+
+  /**
+   * The name of the track
+   */
+  trackLabel?: string;
+
+  /**
+   * Top speed in km/h
+   */
+  maxSpeed?: number;
+
+  /**
+   * The number of the fastest lap
+   */
+  bestLap?: number;
+
+  /**
+   * The total amount of laps
+   */
+  numberOfLaps?: number;
+
+  logId?: string;
   filterChannel?: string;
   dashTriggerPoint?: string;
   dashReferencePoints?: string;
-
-  numberOfShows?: number;
-  trackLabel?: string;
-  maxSpeed?: number;
-  bestLap?: number;
-  numberOfLaps?: number;
-
 }
