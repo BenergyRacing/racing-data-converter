@@ -42,11 +42,11 @@ program
       .default(OutputFormat.AUTO)
   )
   .addOption(
-    new Option('--input-options-file [path]', 'input options json file')
+    new Option('-io, --input-options-file [path]', 'input options json file')
       .default(null)
   )
   .addOption(
-    new Option('--output-options-file [path]', 'output options json file')
+    new Option('-oo, --output-options-file [path]', 'output options json file')
       .default(null)
   )
   .addOption(
