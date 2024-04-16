@@ -19,7 +19,7 @@ export function formatProtuneMultilineString(value: string | undefined): string 
 
 export function formatProtuneNumber(value: number | undefined, decimalPlaces: number): string {
   if (value === undefined || isNaN(value))
-    return '';
+    value = 0;
 
   return value.toLocaleString('pt-BR', {
     maximumFractionDigits: decimalPlaces,
