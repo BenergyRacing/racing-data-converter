@@ -156,6 +156,16 @@ interface CsvWriterOptions {
    * The timestamp column name
    */
   timeColumn?: string;
+
+  /**
+   * The redix point format that will be used as the decimal separator.
+   * This changes both the thousants and decimal separators.
+   *
+   * This property is ignored when `cast` is defined.
+   *
+   * Defaults to "period".
+   */
+  castFractionPoint?: 'period' | 'comma';
 }
 ```
 
@@ -167,6 +177,7 @@ interface CsvWriterOptions {
   "interval": 10,
   "quoted": false,
   "quotedEmpty": true,
-  "timeColumn": "Timestamp"
+  "timeColumn": "Timestamp",
+  "castFractionPoint": "comma"
 }
 ```

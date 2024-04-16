@@ -21,6 +21,8 @@ export class CsvWriter implements BaseWriter {
   }
 
   protected createCsvStream(stream: Readable): Transform {
+    const cast = this.options.cast ?? this.castNumber.bind(this);
+
     const csv = stringify({
       delimiter: this.options.delimiter || ',',
       columns: this.createColumns(),
@@ -28,6 +30,9 @@ export class CsvWriter implements BaseWriter {
       quoted: this.options.quoted,
       quoted_empty: this.options.quotedEmpty,
       record_delimiter: this.options.recordDelimiter,
+      cast: {
+        number: (value, context) => cast(value, context.column?.toString() || ''),
+      },
     });
 
     return stream.pipe(csv);
@@ -44,6 +49,10 @@ export class CsvWriter implements BaseWriter {
         header: getChannelName(channel),
       })),
     ];
+  }
+
+  protected castNumber(value: number): string {
+    return value.toLocaleString(this.options.castFractionPoint === 'comma' ? 'pt-BR' : 'en-US');
   }
 
 }
