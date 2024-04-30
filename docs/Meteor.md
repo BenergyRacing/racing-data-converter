@@ -11,7 +11,7 @@ The format was developed by [Guilherme Chaguri](https://github.com/Guichaguri) f
 
 There are many file formats out there. Some are simple and straightforward, such as CSV, and others are optimized but complex, such as Pickle.
 
-At B'Energy, we needed a writer written in plain C, run in a microcontroller and store its data in a SD Card connected through SPI. And because of that, there were some concerns:
+At B'Energy, we needed a writer written in plain C, that runs in a microcontroller and stores its data in a SD Card connected through SPI. And because of that, there were some concerns:
 - **Simple logic**: as it needed to be written in plain C, we wanted a straightforward solution.
 - **Static memory allocation**: as it ran on a microcontroller, dynamic memory allocation is not an easily available resource.
 - **Small memory footprint**: as the microcontroller RAM and flash is low, we wanted a very small memory usage.
