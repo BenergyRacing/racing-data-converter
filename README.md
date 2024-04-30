@@ -27,19 +27,22 @@ By default, it reads CSV files and outputs any format. The CSV file must have th
 
 ### Install
 
-You need NodeJS (16+ is recommended) installed first.
+You need NodeJS (16+ is recommended) installed first. Then, run the following command:
 ```sh
 npm install -g racing-data-converter
 ```
 
 ### Usage
 
-Type `racing-data-converter --help` for a list of options.
+Run `racing-data-converter --help` for a list of options.
 
 ### Example
+
 ```sh
 racing-data-converter ./input.csv ./output.dlf --output-format protune
 ```
+
+This command will convert an input CSV file named `input.csv` to a Pro Tune's log file named `output.dlf`.
 
 ## Application Programming Interface
 
