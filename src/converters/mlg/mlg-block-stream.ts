@@ -1,7 +1,6 @@
 import { Transform, TransformCallback } from 'stream';
 import { TimedFrameGrouper } from '../timed-frame-grouper';
-import { MlvlgDataChannel, MlvlgType } from './mlg-writer.options';
-import { mlvlgTypeByteSize } from './utils';
+import { MlgDataChannel, MlgType } from './mlg-writer.options';
 
 // noinspection JSAnnotator
 /**
@@ -15,7 +14,7 @@ export class MlgBlockStream extends Transform {
   private currentRecord: number = 0;
 
   constructor(
-    private readonly channels: MlvlgDataChannel[],
+    private readonly channels: MlgDataChannel[],
     private readonly blockByteLength: number,
   ) {
     super({ writableObjectMode: true, readableObjectMode: false });
@@ -35,22 +34,22 @@ export class MlgBlockStream extends Transform {
 
     // Block Data
     for (const channel of this.channels) {
-      const type = channel.mlgType ?? MlvlgType.F32;
+      const type = channel.mlgType ?? MlgType.F32;
       const value = chunk[channel.key] ?? 0;
 
-      if (type === MlvlgType.U08)
+      if (type === MlgType.U08)
         offset = data.writeUInt8(value, offset);
-      else if (type === MlvlgType.S08)
+      else if (type === MlgType.S08)
         offset = data.writeInt8(value, offset);
-      else if (type === MlvlgType.U16)
+      else if (type === MlgType.U16)
         offset = data.writeUInt16BE(value, offset);
-      else if (type === MlvlgType.S16)
+      else if (type === MlgType.S16)
         offset = data.writeInt16BE(value, offset);
-      else if (type === MlvlgType.U32)
+      else if (type === MlgType.U32)
         offset = data.writeUInt32BE(value, offset);
-      else if (type === MlvlgType.S32)
+      else if (type === MlgType.S32)
         offset = data.writeInt32BE(value, offset);
-      else if (type === MlvlgType.S64)
+      else if (type === MlgType.S64)
         offset = data.writeBigInt64BE(BigInt(value), offset);
       else
         offset = data.writeFloatBE(value, offset);

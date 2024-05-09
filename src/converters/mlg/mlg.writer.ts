@@ -1,17 +1,19 @@
 import { BaseWriter } from '../../interfaces/base.writer';
 import { Readable, Transform } from 'stream';
 import { StreamPrefixer } from '../stream-prefixer';
-import { MlgWriterOptions, MlvlgType } from './mlg-writer.options';
+import { MlgWriterOptions, MlgType } from './mlg-writer.options';
 import { TimedFrameGrouper } from '../timed-frame-grouper';
 import { MlgBlockStream } from './mlg-block-stream';
 import { mlvlgTypeByteSize, mlvlgTypeId } from './utils';
 
+/**
+ * Converts data frames into a EFI Analytics Binary MLG logging file (MLVLG).
+ *
+ * @see http://www.efianalytics.com/TunerStudio/docs/MLG_Binary_LogFormat_2.0.pdf
+ */
 export class MlgWriter implements BaseWriter {
 
-  constructor(
-    private readonly options: MlgWriterOptions,
-  ) {
-  }
+  constructor(private readonly options: MlgWriterOptions) {}
 
   public get extension(): string {
     return '.mlg';
@@ -43,12 +45,13 @@ export class MlgWriter implements BaseWriter {
     header.writeUInt16BE(channels.length, 16); // Num Logger Fields
 
     const loggerFields = Buffer.alloc(89 * channels.length, 0);
+    const bitFieldNames = Buffer.alloc(0); // TODO implement bit fields?
 
     for (let i = 0; i < channels.length; i++) {
       const baseOffset = 89 * i;
       const channel = channels[i];
 
-      const type = mlvlgTypeId[channel.mlgType ?? MlvlgType.F32];
+      const type = mlvlgTypeId[channel.mlgType ?? MlgType.F32];
       const name = channel.name || channel.key;
       const unit = channel.unit || '';
       const scale = channel.scale ?? 1;
@@ -64,18 +67,15 @@ export class MlgWriter implements BaseWriter {
       loggerFields.writeFloatBE(scale, baseOffset + 46); // Scale
       loggerFields.writeFloatBE(transform, baseOffset + 50); // Transform
       loggerFields.writeInt8(decimalPlaces, baseOffset + 54); // Digits
-      loggerFields.write(category.substring(0, 33).padEnd(34, '\0'), baseOffset + 55, 'ascii');
+      loggerFields.write(category.substring(0, 33).padEnd(34, '\0'), baseOffset + 55, 'ascii'); // Category
     }
 
-    const bitFieldNames = Buffer.alloc(0);
     const sizeUntilInfoData = format.length + header.length + loggerFields.length + bitFieldNames.length;
-
     const infoData = Buffer.alloc(infoDataString ? infoDataString.length + 1 : 0);
 
     if (infoDataString) {
-      infoData.write(infoDataString + '\0', 'ascii');
-
       header.writeUInt32BE(sizeUntilInfoData, 6); // Info Data Start
+      infoData.write(infoDataString + '\0', 'ascii');
     }
 
     header.writeUInt32BE(sizeUntilInfoData + infoData.length, 10); // Data Begin Start
@@ -87,7 +87,7 @@ export class MlgWriter implements BaseWriter {
     let length = 0;
 
     for (const channel of this.options.channels) {
-      const type = channel.mlgType ?? MlvlgType.F32;
+      const type = channel.mlgType ?? MlgType.F32;
 
       length += mlvlgTypeByteSize[type];
     }

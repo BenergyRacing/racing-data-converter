@@ -1,23 +1,23 @@
-import { MlvlgType } from './mlg-writer.options';
+import { MlgType } from './mlg-writer.options';
 
-export const mlvlgTypeId: Record<MlvlgType, number> = {
-  [MlvlgType.U08]: 0,
-  [MlvlgType.S08]: 1,
-  [MlvlgType.U16]: 2,
-  [MlvlgType.S16]: 3,
-  [MlvlgType.U32]: 4,
-  [MlvlgType.S32]: 5,
-  [MlvlgType.S64]: 6,
-  [MlvlgType.F32]: 7,
+export const mlvlgTypeId: Record<MlgType, number> = {
+  [MlgType.U08]: 0,
+  [MlgType.S08]: 1,
+  [MlgType.U16]: 2,
+  [MlgType.S16]: 3,
+  [MlgType.U32]: 4,
+  [MlgType.S32]: 5,
+  [MlgType.S64]: 6,
+  [MlgType.F32]: 7,
 }
 
-export const mlvlgTypeByteSize: Record<MlvlgType, number> = {
-  [MlvlgType.U08]: 1,
-  [MlvlgType.S08]: 1,
-  [MlvlgType.U16]: 2,
-  [MlvlgType.S16]: 2,
-  [MlvlgType.U32]: 4,
-  [MlvlgType.S32]: 4,
-  [MlvlgType.S64]: 8,
-  [MlvlgType.F32]: 4,
+export const mlvlgTypeByteSize: Record<MlgType, number> = {
+  [MlgType.U08]: 1,
+  [MlgType.S08]: 1,
+  [MlgType.U16]: 2,
+  [MlgType.S16]: 2,
+  [MlgType.U32]: 4,
+  [MlgType.S32]: 4,
+  [MlgType.S64]: 8,
+  [MlgType.F32]: 4,
 };

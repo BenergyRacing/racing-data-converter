@@ -6,7 +6,7 @@ export interface MlgWriterOptions extends BaseWriterOptions {
   /**
    * The channels that will be fed into the writer
    */
-  channels: MlvlgDataChannel[];
+  channels: MlgDataChannel[];
 
   /**
    * The interval in milliseconds in which each block will be spaced
@@ -25,7 +25,7 @@ export interface MlgWriterOptions extends BaseWriterOptions {
 
 }
 
-export enum MlvlgType {
+export enum MlgType {
   /**
    * Unsigned 8-bit integer
    */
@@ -67,13 +67,13 @@ export enum MlvlgType {
   F32 = 'F32',
 }
 
-export interface MlvlgDataChannel extends DataChannel {
+export interface MlgDataChannel extends DataChannel {
   /**
    * The MLVLG value format.
    *
    * Defaults to F32
    */
-  mlgType?: MlvlgType;
+  mlgType?: MlgType;
 
   /**
    * The number to add to the raw value.
