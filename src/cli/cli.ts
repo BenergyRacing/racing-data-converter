@@ -31,6 +31,7 @@ program
         OutputFormat.CSV,
         OutputFormat.EXCEL_CSV,
         OutputFormat.MEGA_SQUIRT,
+        OutputFormat.MLG,
         OutputFormat.MOTEC_CSV,
         OutputFormat.PI_TOOLBOX_ASCII,
         OutputFormat.PROTUNE,
