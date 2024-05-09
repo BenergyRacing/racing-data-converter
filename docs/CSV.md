@@ -1,6 +1,12 @@
-# racing-data-converter CSV columns format
+# CSV
 
-## Header format
+This document describes how racing-data-converter handles CSV files, both as an input and as an output.
+
+## CSV Format
+
+Besides the [CSV basic rules](https://en.wikipedia.org/wiki/Comma-separated_values), racing-data-converter allows formatting the CSV data to describe channel details and numeric values.
+
+### Header format
 
 In order to extract channel information, racing-data-converter allows unit as well as channel identification to be defined in the header using the following format:
 
@@ -13,13 +19,13 @@ All the headers below have valid syntax:
 - `Speed (Km/h)`
 - `Speed`
 
-## Timestamp column
+### Timestamp column
 
-By default, racing-data-converter expects that the timestamp in milliseconds is the first column in the file (named `Time (ms)` by default).
+By default, racing-data-converter expects that the first column is the timestamp in milliseconds (named `Time (ms)` by default).
 
 The lines **must** be ordered by timestamp (lowest first).
 
-## Column Values
+### Column Values
 
 Column values are expected to be numbers, using period as the decimal separator and using comma as the thousants separator.
 
@@ -31,7 +37,7 @@ All the numbers below have valid syntax:
 
 Any non-numeric value will be treated as blank.
 
-## Sample
+### Sample
 
 No custom configuration needed, this example will work as-is.
 
@@ -43,7 +49,7 @@ Time (ms),Speed (Km/h) [speed],Brake Pressure (bar)
 200,5.25,11.50
 ```
 
-## Custom Configuration Object
+## Custom Configuration
 
 The CLI allows changing the default configuration through a JSON configuration file.
 
@@ -91,6 +97,8 @@ interface CsvReaderOptions {
 ```
 
 #### Sample
+
+csv-input-options.json
 ```json
 {
   "delimiter": ",",
@@ -115,6 +123,14 @@ interface CsvReaderOptions {
     }
   }
 }
+```
+
+#### Usage
+
+Pass the file path to `--input-options-file`:
+
+```sh
+racing-data-converter ./input.csv ./output.dlf --input-options-file ./csv-input-options.json
 ```
 
 ### Writer Configuration Format
@@ -170,6 +186,8 @@ interface CsvWriterOptions {
 ```
 
 #### Sample
+
+csv-output-options.json
 ```json
 {
   "delimiter": ",",
@@ -180,4 +198,12 @@ interface CsvWriterOptions {
   "timeColumn": "Timestamp",
   "castFractionPoint": "comma"
 }
+```
+
+#### Usage
+
+Pass the file path to `--output-options-file`:
+
+```sh
+racing-data-converter ./input.json ./output.csv --output-options-file ./csv-output-options.json
 ```
