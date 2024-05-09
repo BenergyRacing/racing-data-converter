@@ -72,7 +72,7 @@ interface DataFrame {
 }
 ```
 
-Fun fact: This is also the internal format used as an intermediate representation by the library to convert between different formats.
+This is also the internal format used as an intermediate representation by the library to convert between different formats.
 
 ---
 
