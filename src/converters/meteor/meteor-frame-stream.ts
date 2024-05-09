@@ -7,7 +7,7 @@ import { FrameType, getBufferFromDataFrame } from './utils';
 /**
  * A transform stream that encodes data frame objects in binary, in the Meteor format version 2.
  *
- * Note: This transformer does not supports writing composites, only single frames.
+ * Note: This transformer does not support writing composites, only single frames.
  * The resulting data may not be as tightly optimized.
  */
 export class MeteorFrameStream extends Transform {
