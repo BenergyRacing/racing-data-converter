@@ -6,18 +6,19 @@ This library was developed at [B'Energy Racing](https://benergyracing.com.br), a
 
 ## Formats supported
 
-| Format                 | Extension  | Software            | Support       |
-|------------------------|------------|---------------------|---------------|
-| Pro Tune               | .dlf       | Pro Tune Analyzer   | Writer        |
-| MegaSquirt ASCII       | .msl       | MegaLogViewer       | Writer        |
-| MoTeC CSV              | .csv       | MoTeC i2            | Writer        |
-| Pi ASCII               | .txt       | Cosworth Pi Toolbox | Writer        |
-| BOSCH Darab ASCII      | .txt       | Bosch WinDarab      | Writer        |
-| RacePak ASCII          | .txt       | RacePak DataLink II | Writer        |
-| Excel CSV              | .csv       | Microsoft Excel     | Writer        |
-| CSV                    | .csv, .tsv | -                   | Reader/Writer |
-| B'Energy Meteor Log    | .met       | -                   | Reader/Writer |
-| JSON (raw data frames) | .json      | -                   | Reader/Writer |
+| Format                           | Extension  | Software            | Support       |
+|----------------------------------|------------|---------------------|---------------|
+| Pro Tune                         | .dlf       | Pro Tune Analyzer   | Writer        |
+| EFI Analytics ASCII              | .msl       | MegaLogViewer       | Writer        |
+| EFI Analytics Binary MLG (MLVLG) | .mlg       | MegaLogViewer       | Writer        |
+| MoTeC CSV                        | .csv       | MoTeC i2            | Writer        |
+| Pi ASCII                         | .txt       | Cosworth Pi Toolbox | Writer        |
+| BOSCH Darab ASCII                | .txt       | Bosch WinDarab      | Writer        |
+| RacePak ASCII                    | .txt       | RacePak DataLink II | Writer        |
+| Excel CSV                        | .csv       | Microsoft Excel     | Writer        |
+| CSV                              | .csv, .tsv | -                   | Reader/Writer |
+| B'Energy Meteor Log              | .met       | -                   | Reader/Writer |
+| JSON (raw data frames)           | .json      | -                   | Reader/Writer |
 
 ## Command Line Interface
 
