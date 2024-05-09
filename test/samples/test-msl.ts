@@ -1,12 +1,12 @@
 import { createWriteStream } from 'fs';
 import { createRandomDataStream, testChannels } from '../data/utils';
-import { MegaSquirtWriter } from '../../src/converters/mega-squirt/mega-squirt.writer';
+import { MslWriter } from '../../src/converters/msl/msl.writer';
 
-const csv = new MegaSquirtWriter({
+const csv = new MslWriter({
   channels: testChannels,
 });
 
 const data = createRandomDataStream();
-const out = createWriteStream('./test/samples/out/test-mega-squirt' + csv.extension);
+const out = createWriteStream('./test/samples/out/test-msl' + csv.extension);
 
 csv.createStream(data).pipe(out);

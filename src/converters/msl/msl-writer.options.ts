@@ -1,6 +1,6 @@
 import { BaseWriterOptions } from '../../interfaces/base-writer.options';
 
-export interface MegaSquirtWriterOptions extends BaseWriterOptions {
+export interface MslWriterOptions extends BaseWriterOptions {
 
   /**
    * The interval in milliseconds in which each row will be spaced

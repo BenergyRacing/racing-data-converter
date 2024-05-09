@@ -49,7 +49,7 @@ This command will convert an input CSV file named `input.csv` to a Pro Tune's lo
 
 1. Create an input stream. This can be a simple passthrough stream such as `DataFrameStream` or read from a `CsvReader`, `MeteorReader` or a `JsonReader`.
 2. Define the list of channels that you will work with, including information such as the unit of measure.
-3. Create a writer. This can be a `CsvWriter`, `MeteorWriter`, `ExcelCsvWriter`, `MegaSquirtWriter`, `MotecCsvWriter`, `PiToolboxAsciiWriter`, `ProtuneWriter`, `RacePakWriter`, `WinDarabWriter` or a `JsonWriter`.
+3. Create a writer. This can be a `CsvWriter`, `MeteorWriter`, `ExcelCsvWriter`, `MslWriter`, `MlgWriter`, `MotecCsvWriter`, `PiToolboxAsciiWriter`, `ProtuneWriter`, `RacePakWriter`, `WinDarabWriter` or a `JsonWriter`.
 4. Create a writer stream from the writer class, receiving the input stream created earlier.
 5. The file is successfully converted!
 

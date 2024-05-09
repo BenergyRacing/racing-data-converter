@@ -5,7 +5,7 @@ import {
   CsvWriterOptions,
   ExcelCsvWriter,
   JsonWriter,
-  MegaSquirtWriter,
+  MslWriter,
   MlgWriter,
   MeteorWriter,
   MotecCsvWriter,
@@ -19,7 +19,8 @@ export enum OutputFormat {
   AUTO = 'auto',
   CSV = 'csv',
   EXCEL_CSV = 'excel-csv',
-  MEGA_SQUIRT = 'mega-squirt',
+  MEGA_SQUIRT = 'mega-squirt', // TODO remove megasquirt in favor of msl
+  MSL = 'msl',
   MLG = 'mlg',
   MOTEC_CSV = 'motec-csv',
   PI_TOOLBOX_ASCII = 'pi-toolbox-ascii',
@@ -49,7 +50,7 @@ export function getOutputFormatAndOptions(format: string, filename: string): [Ou
     return [OutputFormat.PROTUNE, {}];
 
   if (filename.endsWith('.msl'))
-    return [OutputFormat.MEGA_SQUIRT, {}];
+    return [OutputFormat.MSL, {}];
 
   if (filename.endsWith('.mlg'))
     return [OutputFormat.MLG, {}];
@@ -82,8 +83,8 @@ export function createOutput(format: OutputFormat, options: any): BaseWriter {
   if (format === OutputFormat.EXCEL_CSV)
     return new ExcelCsvWriter(options);
 
-  if (format === OutputFormat.MEGA_SQUIRT)
-    return new MegaSquirtWriter(options);
+  if (format === OutputFormat.MSL || format === OutputFormat.MEGA_SQUIRT)
+    return new MslWriter(options);
 
   if (format === OutputFormat.MLG)
     return new MlgWriter(options);

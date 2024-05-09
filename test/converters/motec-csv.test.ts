@@ -1,4 +1,4 @@
-import { MegaSquirtWriter, MotecCsvWriter } from '../../src';
+import { MotecCsvWriter } from '../../src';
 import { getWriterOutput } from '../data/utils';
 import { frames1 } from '../data/frames1';
 
