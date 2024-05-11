@@ -45,9 +45,50 @@ A composite is a collection of multiple topics all written at once.
 
 A data frame containing a composite can contain as many as 255 topics in a single data frame.
 
-![Meteor File Format](./Meteor-File-Format.svg)
-
 The format fills its objectives as each topic can be written in distinct frequencies, related topics can be written in a single data frame (through composites) and the format is optimized in size as well as being relatively simple to implement a writer.
+
+### Structure
+
+| Format Signature | General Information | Data Frame | Data Frame  | ... |
+| ---------------- | ------------------- |------------|-------------|-----|
+
+All numbers present in this format are big endian, except data values that are exclusively little endian.
+
+#### Format Signature
+
+For identifying whether the file is in the logger format, a signature is attached to the first 13 bytes of the file. This is based on the [PNG file format](https://www.w3.org/TR/PNG-Rationale.html#R.PNG-file-signature).
+- The first byte is non-ASCII to avoid text editors from opening it.
+- The following bytes are "B'ENERGY" in ASCII to identify this is our format.
+- The last four bytes are tests for improper text handling.
+
+The signature must be the exact following 13 bytes:
+```
+0x89 0x42 0x27 0x45 0x4E 0x45 0x52 0x47 0x59 0x0D 0x0A 0x1A 0x0A
+```
+
+#### General Information (header)
+
+| Field              | Offset | Length (bytes)  | Description                                                           |
+|--------------------|:------:|:---------------:|-----------------------------------------------------------------------|
+| Log Format Version |   0    |        1        | The file format version, for this format, it must be 2                |
+| Day                |   1    |        1        | The date. Can be 0 if not available.                                  |
+| Month              |   2    |        1        | The month. Can be 0 if not available.                                 |
+| Year               |   3    |        1        | The year in two digits (e.g. 24 for 2024). Can be 0 if not available. |
+| Time of Day        |   4    |        4        | Time of day in milliseconds since 00:00 in which this log has started |
+| Log Name Length    |   8    |        1        | The length in bytes of the name string                                |
+| Log Name           |   9    | Log Name Length | The log name in ASCII. It should not end with \0.                     |
+
+#### Data Frame
+
+| Field       | Offset | Length (bytes) | Description                               |
+|-------------|:------:|:--------------:|-------------------------------------------|
+| Timestamp   |   0    |       4        | Milliseconds since the start of the log   |
+| Frame Type  |   4    |       1        | 1 = topic, 2 = composite                  |
+| Frame ID    |   5    |       1        | Topic or Composite ID                     |
+| Data Length |   6    |       1        | The length in bytes of the following data |
+| Data Value  |   7    |  Data Length   | The value in varying length               |
+
+![Meteor File Format](./Meteor-File-Format.svg)
 
 ## Meteor Data Specification
 
