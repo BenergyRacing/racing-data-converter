@@ -1,4 +1,4 @@
-# racing-data-converter JSON log format
+# Racing Data Converter JSON log format
 
 The format exported/imported as "JSON" in the racing-data-converted library is a JSON object containing raw data frames as well as channel information.
 

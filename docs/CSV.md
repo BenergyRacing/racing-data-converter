@@ -21,15 +21,15 @@ All the headers below have valid syntax:
 
 ### Timestamp column
 
-By default, racing-data-converter expects that the first column is the timestamp in milliseconds (named `Time (ms)` by default).
+By default, racing-data-converter assumes that the first column is the timestamp in milliseconds (named `Time (ms)` by default).
 
-The lines **must** be ordered by timestamp (lowest first).
+All lines **must** be ordered by timestamp (lowest first). The data is not required to follow a fixed frequency.
 
 ### Column Values
 
 Column values are expected to be numbers, using period as the decimal separator and using comma as the thousants separator.
 
-All the numbers below have valid syntax:
+All the numbers below are valid:
 - `3.14`
 - `3.0000`
 - `3`
