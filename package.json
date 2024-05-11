@@ -39,12 +39,15 @@
     "data-converter",
     "motorsport",
     "protune",
-    "megasquirt",
     "motec",
     "pi-toolbox",
     "racepak",
+    "windarab",
     "excel",
-    "csv"
+    "csv",
+    "megasquirt",
+    "msl",
+    "mlg"
   ],
   "dependencies": {
     "commander": "^10.0.0",
